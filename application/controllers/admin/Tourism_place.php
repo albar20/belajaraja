@@ -48,16 +48,12 @@
 			$judul					= $this->model_utama->get_detail('1','setting_id','setting')->row()->website_name;
 
 			$data['title'] 			= 'Halaman Tambah  | '.$judul;
-
 			$data['heading'] 		= 'Add Tourism Place';
-
 			$data['form_action'] 	= site_url('admin/tourism_place/add_process');
-
 			$data['page']			= 'admin/tourism_place/page_form';
+			$data['province']		= $this->db->query("select * from location_provinces");
 
 			$this->load->view($this->admin_template, $data);
-
-
 
 			$this->insert_log('lihat form Tourism Place');
 
@@ -68,7 +64,6 @@
 		function add_process()
 
 		{
-
 			$user_id 				= $this->session->userdata('id_user');
 
 			$judul					= $this->model_utama->get_detail('1','setting_id','setting')->row()->website_name;
@@ -95,6 +90,8 @@
 				$insert_data = array (
 								'name'	=> $this->input->post('name'), 
 								'description' => $this->input->post('description'),
+								'province_id' => $this->input->post('province_id'),
+								'city_id' => $this->input->post('city_id'),
 								'slug'		=> $slug,
 								'picture_1'	=> $file_dokumen1,
 								'picture_2'	=> $file_dokumen2,
@@ -133,10 +130,17 @@
 			$data['heading'] 		= 'Update tourism_place';
 			$data['form_action'] 	= site_url('admin/tourism_place/update_process');
 
-			$wew = $this->model_utama->get_detail($kode, 'tourism_place_id', 'tourism_place')->row();
+			//$wew = $this->model_utama->get_detail($kode, 'tourism_place_id', 'tourism_place')->row();
+			$data['province']		= $this->db->query("select * from location_provinces");
+			$wew = $this->db->query("select *,tp.name as tour_name,lc.name as city_name from tourism_place as tp
+									LEFT JOIN location_provinces as lp
+									ON tp.province_id = lp.id
+									LEFT JOIN location_city as lc
+									ON tp.city_id = lc.id
+			")->row();
 
 			$this->session->set_userdata('kd_update', $wew->tourism_place_id);
-			$data['default']	 	= $wew;	
+			$data['tour']		 	= $wew;	
 			$data['page']			= 'admin/tourism_place/page_form';
 
 			$this->load->view($this->admin_template, $data);
@@ -296,6 +300,20 @@
 			$this->image_lib->resize();
 			$this->image_lib->clear();
 
+		}
+		
+		function ambil_kota($id)
+		{
+			$tampil		= '<option value="">-- Choose City --</option>';
+			
+			$kota		= $this->db->query("select * from location_city where province_id = '$id'")->result();
+			
+			foreach($kota as $row)
+			{
+				$tampil		.= '<option value="'.$row->id.'">'.$row->name.'</option>';
+			}
+			
+			echo $tampil;
 		}
 		
 	}	
