@@ -8875,3 +8875,15 @@ input[type=radio]:checked:before {
 	cursor: pointer;
 	margin-bottom:10px
 }
+
+.nilai-rating{
+	text-align: center;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.bintang-rating-big{
+	text-align:center;
+	font-size: 2em;
+	color: #ffb300;
+}

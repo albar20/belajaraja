@@ -889,7 +889,9 @@ class MY_Controller extends CI_Controller {
         return $sql;*/
 		
 		$sql    =   "SELECT 
-                        *
+                        *,
+						(select count(*) as total_review from tour_review where tourism_place_id = tourism_place.tourism_place_id) as total_review,
+						(select sum(rate) as nilai_rating from tour_review where tourism_place_id = tourism_place.tourism_place_id) as nilai_rating
                     FROM tourism_place " 
                     .$order_by. 
                     " LIMIT ".$start.",".$limit;

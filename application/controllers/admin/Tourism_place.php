@@ -48,16 +48,12 @@
 			$judul					= $this->model_utama->get_detail('1','setting_id','setting')->row()->website_name;
 
 			$data['title'] 			= 'Halaman Tambah  | '.$judul;
-
 			$data['heading'] 		= 'Add Tourism Place';
-
 			$data['form_action'] 	= site_url('admin/tourism_place/add_process');
-
 			$data['page']			= 'admin/tourism_place/page_form';
+			$data['province']		= $this->db->query("select * from location_provinces");
 
 			$this->load->view($this->admin_template, $data);
-
-
 
 			$this->insert_log('lihat form Tourism Place');
 
@@ -68,17 +64,13 @@
 		function add_process()
 
 		{
-
 			$user_id 				= $this->session->userdata('id_user');
 
 			$judul					= $this->model_utama->get_detail('1','setting_id','setting')->row()->website_name;
 
 			$data['title'] 			= 'Halaman Tambah product_category | '.$judul;
-
 			$data['heading'] 		= 'Add product_category List';
-
 			$data['form_action'] 	= site_url('admin/tourism_place/add_process');
-
 			$data['page']			= 'admin/tourism_place/page_form';
 
 			$this->form_validation->set_rules('name', 'name', 'required|min_length[3]');	
@@ -98,6 +90,8 @@
 				$insert_data = array (
 								'name'	=> $this->input->post('name'), 
 								'description' => $this->input->post('description'),
+								'province_id' => $this->input->post('province_id'),
+								'city_id' => $this->input->post('city_id'),
 								'slug'		=> $slug,
 								'picture_1'	=> $file_dokumen1,
 								'picture_2'	=> $file_dokumen2,
@@ -113,73 +107,45 @@
 				// $this->insert_log('tambah data category_product');
 
 				redirect('admin/tourism_place/add', 'refresh');
-
 			}
-
 			else
-
 			{
-
 				$this->load->view($this->admin_template, $data);
-
 			}
-
 		}
-
-		
 
 		function delete($kode)
-
 		{
-
 			$this->insert_log('hapus data category_product dengan id : '.$kode);
-
-
-
 			$this->model_utama->delete_data($kode, 'category_product_id','category_product');
-
 			$this->session->set_flashdata('success', 'Data berhasil dihapus!');
-
 			redirect('admin/product_category');
-
 		}
 
-		
-
 		function update($kode)
-
 		{
-
 			$user_id 				= $this->session->userdata('id_user');
-
 			$judul					= $this->model_utama->get_detail('1','setting_id','setting')->row()->website_name;
-
-			$data['title'] 		= 'Halaman Ubah tourism_place | '.$judul;
-
+			$data['title'] 			= 'Halaman Ubah tourism_place | '.$judul;
 			$data['heading'] 		= 'Update tourism_place';
-
 			$data['form_action'] 	= site_url('admin/tourism_place/update_process');
 
-				
+			//$wew = $this->model_utama->get_detail($kode, 'tourism_place_id', 'tourism_place')->row();
+			$data['province']		= $this->db->query("select * from location_provinces");
+			$wew = $this->db->query("select *,tp.name as tour_name,lc.name as city_name from tourism_place as tp
+									LEFT JOIN location_provinces as lp
+									ON tp.province_id = lp.id
+									LEFT JOIN location_city as lc
+									ON tp.city_id = lc.id
+			")->row();
 
-			$wew = $this->model_utama->get_detail($kode, 'category_product_id', 'category_product')->row();
-
-			$this->session->set_userdata('kd_update', $wew->category_product_id);
-
-		
-
-			$data['default']['category_product_name']		 	= $wew->category_product_name;	
-
-			
-
-			$data['page']			= 'admin/product_category/page_form';
+			$this->session->set_userdata('kd_update', $wew->tourism_place_id);
+			$data['tour']		 	= $wew;	
+			$data['page']			= 'admin/tourism_place/page_form';
 
 			$this->load->view($this->admin_template, $data);
 
-
-
-			$this->insert_log('klik ubah data category dengan id : '.$kode);
-
+			$this->insert_log('klik ubah wisata dengan id : '.$kode);
 		}
 
 		
@@ -334,6 +300,20 @@
 			$this->image_lib->resize();
 			$this->image_lib->clear();
 
+		}
+		
+		function ambil_kota($id)
+		{
+			$tampil		= '<option value="">-- Choose City --</option>';
+			
+			$kota		= $this->db->query("select * from location_city where province_id = '$id'")->result();
+			
+			foreach($kota as $row)
+			{
+				$tampil		.= '<option value="'.$row->id.'">'.$row->name.'</option>';
+			}
+			
+			echo $tampil;
 		}
 		
 	}	
