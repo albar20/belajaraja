@@ -23,7 +23,8 @@ class Login extends MY_Controller
 		$this->form_validation->set_rules('user','user','required');
 		$this->form_validation->set_rules('password','password','required');
 		if ($this->form_validation->run() == FALSE) {
-			$this->index();	
+			$this->session->set_flashdata('form_error',validation_errors());
+			redirect('login');
 		}else{
 			 $user = $this->input->post('user');
 			 $pass =  md5($this->input->post('password'));

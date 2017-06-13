@@ -23,10 +23,10 @@
 				</div>	
 			</div>
 			<?php echo form_close(); ?>
-			<?php if (validation_errors() == TRUE): ?>
+			<?php if ($this->session->flashdata('form_error')): ?>
 			<div class="alert alert-warning alert-dismissable">
   				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			  <strong>Warning!</strong> <?php echo validation_errors(); ?>
+			  <strong>Warning!</strong> <?php echo $this->session->flashdata('form_error'); ?>
 			</div>
 		<?php endif ?>
 

@@ -2,16 +2,21 @@
 <div class="container">
 <div class="row">
 	<div class="review">
-		<!-- <div class="col-md-2 img">
 
-		</div>
-		<div class="col-md-4 rev">
-			
-		</div> -->
-		<div class="col-md-2">
-		<h2>menu</h2>
-</div>
-		<div class="col-md-10">
+	<div class="col-md-3">
+		<img class="img-rounded" src="<?php echo base_url()?>uploads/infongetrip/user/WIN_20160113_15_57_26_Pro.jpg" alt="" title="">
+		<h2>Cahyo Prabowo</h2>
+		<p class="place-rev"> <i class="fa fa-map-marker marker" aria-hidden="true"></i> Lampung selatan, Join date:  <i>2 Jan 2017</i>  </p>
+<ul class="list-group menu-profile">
+<a href="">  <li class="list-group-item sub-menu"><i class="fa fa-user" aria-hidden="true"></i>
+ <?php echo ucwords('profile') ?></li> </a>	
+<a href="">  <li class="list-group-item sub-menu"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+ <?php echo ucwords('review') ?></li> </a>	
+<a href="">  <li class="list-group-item sub-menu"><i class="fa fa-plane" aria-hidden="true"></i>
+ <?php echo ucwords('planning') ?></li> </a>	
+</ul> 
+	</div>
+		<div class="col-md-9">
 			<h2><i class="fa fa-quote-right" aria-hidden="true"></i>
  Client Constribution</h2>
 			  <ul class="breadcrumb">
@@ -67,6 +72,24 @@
 </section>
 
 <style type="text/css">
+.menu-profile{
+	width: 100%;
+	margin: 0px;
+	margin-top: 5px;
+}
+.menu-profile .sub-menu{
+	background-color: #5b6366!important;
+	color: white;
+}
+.list-group-item:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
 .review{
 	border-right: 1px solid  #ddd;
 }

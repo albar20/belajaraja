@@ -23,7 +23,7 @@ class User extends MY_Controller
 	}
 	public function update_user(){
 		// $id = $this->session->userdata('user_id_user');
-		$user = $this->db->get_where('user',array('user_id'=>$this->input->post('id')))->row();
+		$user = $this->db->get_where('user',array('user_id'=>$this->session->userdata('user_id_user')))->row();
 			echo "{";
 	echo "\"phone\":" . "\"" . $user->phone . "\",";
 	echo "\"address\":" . "\"" . $user->address . "\",";

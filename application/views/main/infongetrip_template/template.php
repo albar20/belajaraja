@@ -54,66 +54,9 @@
 <?php $this->carabiner->js("front_page/js/jquery.rateyo.min.js","","false"); ?>	
 <?php $this->carabiner->js("front_page/js/rating.js","","false"); ?>
 <?php $this->carabiner->js("front_page/template/infongetrip/js/review.js","","false"); ?>
+<?php $this->carabiner->js("front_page/template/infongetrip/js/update_profile.js","","false"); ?>
 <?php echo $this->carabiner->display('js'); ?>
 
-<script type="text/javascript">
-function show_user(){
-	$.ajax({
-		type : "POST",
-		url : "<?php echo base_url() ?>user/show_user",
-		success : function(res){
-			$(".info-table").html(res);
-		}
-	})
-}
-
-	$(document).ready(function() {
-		show_user();
-		$("#save_user").hide();
-		$(".update-table").hide();
-		$(".update_user").click(function()	{
-				//alert($(this).attr("shoes-id"));
-				
-				$.ajax({
-					type:'POST',
-					url :'<?php echo base_url() ?>user/update_user',
-					data :"id=" + "<?php echo $this->session->userdata('user_id_user'); ?>",
-					dataType: "json",
-					success: function(res)	{
-						$("#update_user").hide();
-						$("#save_user").show();
-						$(".update-table").show();
-						  $(".info-table").hide();
-						  $("#phone").val(res.phone);
-						  $("#address").val(res.address);
-						  $("#site").val(res.site);
-						  $("#birthday").val(res.birthday);
-						  $("#gender").val(res.gender);
-						  //$('input[name=address]').val('tes'); //cara memanggil berdasarkan name
-						//$("#totalqty").html("<strong>" + resdata + "&nbsp;items</strong>");
-
-					}
-				});
-			});
-
-		$("#save_user").click(function(event) {
-			$.ajax({
-				type : "POST",
-				url : "<?php echo base_url() ?>user/do_update_user",
-				data : "phone=" + $("#phone").val() + "&address=" + $("#address").val() 
-						+ "&site=" + $("#site").val() + "&birthday=" + $("#birthday").val()
-						+ "&gender=" + $("#gender").val(),
-				success : function(){
-					$("#update_user").show();
-						$("#save_user").hide();
-					$(".update-table").hide();
-						  $(".info-table").show();
-						  show_user();
-				}
-			})
-		});
-	});
-</script>
 
 </body>
 </html>
