@@ -11,22 +11,7 @@
 							</div>
 							<div class="tour_after_title">
 								
-								<div class="tour-share">
-									<ul class="share-social">
-										<li>
-											<a target="_blank" class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-										</li>
-										<li>
-											<a target="_blank" class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-										</li>
-										<li>
-											<a target="_blank" class="pinterest" href="#"><i class="fa fa-pinterest"></i></a>
-										</li>
-										<li>
-											<a target="_blank" class="googleplus" href="#"><i class="fa fa-google"></i></a>
-										</li>
-									</ul>
-								</div>
+								
 							</div>
 							<div id="slider" class="flexslider">
 								<ul class="slides">
@@ -98,7 +83,11 @@
 																<?php } ?>	
 																<?php if($row->rate < $i and $row->rate > $i-1){
 																?>
-																<i class="fa fa-star-half"></i>
+																<i class="fa fa-star-half-o"></i>
+																<?php } 
+																	for($j=$i;$j<5;$j++){
+																?>	
+																	<i class="fa fa-star-o"></i>
 																<?php } ?>
 																</div>
 																<p class="meta">
@@ -249,19 +238,20 @@
 									<div class="clear"></div>
 									<div class="booking">
 										<div class="">
-											<div class="form-block__title">
-												<h4>Rating</h4>
-											</div>
 											<div id="tourBookingForm">
-												<p><?php echo $tour_rating?></p>
+												<p class="nilai-rating"><?php echo $tour_rating?></p>
 											
-												<p>
+												<p class="bintang-rating-big">
 													<?php 																					for($i=1;$i<=$tour_rating;$i++){?>
-														<i style="font-size:2em;color:#ffb300;" class="fa fa-star" aria-hidden="true"></i>
+														<i class="fa fa-star" aria-hidden="true"></i>
 													<?php } ?>	
 													<?php if($tour_rating < $i and $tour_rating > $i-1){
 													?>
-													<i style="font-size:2em;color:#ffb300;" class="fa fa-star-half" aria-hidden="true"></i>
+													<i class="fa fa-star-half-o" aria-hidden="true"></i>
+													<?php } 
+														for($j=$i;$j<5;$j++){
+													?>	
+														<i class="fa fa-star-o"></i>
 													<?php } ?>
 												</p>
 											

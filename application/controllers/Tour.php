@@ -24,7 +24,7 @@ class Tour extends MY_Controller {
 		$sql = $this->tour_sql_helper(	$start, 
 												$limit );
 
-		$data['tour_list']	= $this->db->query($sql);										
+		$data['tour_list']	= $this->db->query($sql);		
 												
 		/*====================================================
 			2.	PAGINATION STRUCTURE
@@ -39,8 +39,6 @@ class Tour extends MY_Controller {
 											$total_row,
 											$uri_segment		
 											);										
-												
-		$data['tour_list']	= $this->db->query($sql);
 		
 		//$data['best_seller'] 	= $this->get_best_seller_helper($limit);
 

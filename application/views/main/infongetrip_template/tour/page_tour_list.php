@@ -21,11 +21,27 @@
 									</div>
 									<div class="read_more">
 										<div class="item_rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
+											<?php
+										if($row->total_review == 0)
+										{
+											echo '<span style="font-size:11px">Belum ada review</span>' ;
+										}
+										else
+										{
+											$rate = $row->nilai_rating/$row->total_review;
+											for($i=1;$i<=$rate;$i++){?>
+												<i class="fa fa-star"></i>
+											<?php } ?>	
+											<?php if($rate < $i and $rate > $i-1){
+											?>
+											<i class="fa fa-star-half-o"></i>
+											<?php } 
+												for($j=$i;$j<5;$j++){
+											?>	
+												<i class="fa fa-star-o"></i>
+											<?php } 
+										}	
+											?>
 										</div>
 										<a rel="nofollow" href="<?php echo base_url()?>tour/detail/<?php echo $row->slug?>" class="button product_type_tour_phys add_to_cart_button">Read more</a>
 									</div>
@@ -87,64 +103,6 @@
 								</form>
 							</div>
 						</div>
-						<aside class="widget widget_travel_tour">
-							<div class="wrapper-special-tours">
-								<div class="inner-special-tours">
-									<a href="single-tour.html">
-										<img width="430" height="305" src="http://placehold.it/430x305" alt="Discover Brazil" title="Discover Brazil"></a>
-									<div class="item_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<div class="post_title"><h3>
-										<a href="single-tour.html" rel="bookmark">Discover Brazil</a>
-									</h3></div>
-									<div class="item_price">
-										<span class="price">$93.00</span>
-									</div>
-								</div>
-								<div class="inner-special-tours">
-									<a href="single-tour.html">
-										<span class="onsale">Sale!</span>
-										<img width="430" height="305" src="http://placehold.it/430x305" alt="Discover Brazil" title="Discover Brazil"></a>
-									<div class="item_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<div class="post_title"><h3>
-										<a href="single-tour.html" rel="bookmark">Kiwiana Panorama</a>
-									</h3></div>
-									<div class="item_price">
-										<span class="price"><del>$87.00</del>
-										<ins>$82.00</ins></span>
-									</div>
-								</div>
-								<div class="inner-special-tours">
-									<a href="single-tour.html">
-										<img width="430" height="305" src="http://placehold.it/430x305" alt="Discover Brazil" title="Discover Brazil">
-									</a>
-									<div class="item_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<div class="post_title"><h3>
-										<a href="single-tour.html" rel="bookmark">Anchorage to Quito</a>
-									</h3></div>
-									<div class="item_price">
-										<span class="price">$64.00</span>
-									</div>
-								</div>
-							</div>
-						</aside>
 					</div>
 				</div>
 			</div>

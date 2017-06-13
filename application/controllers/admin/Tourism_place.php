@@ -74,11 +74,8 @@
 			$judul					= $this->model_utama->get_detail('1','setting_id','setting')->row()->website_name;
 
 			$data['title'] 			= 'Halaman Tambah product_category | '.$judul;
-
 			$data['heading'] 		= 'Add product_category List';
-
 			$data['form_action'] 	= site_url('admin/tourism_place/add_process');
-
 			$data['page']			= 'admin/tourism_place/page_form';
 
 			$this->form_validation->set_rules('name', 'name', 'required|min_length[3]');	
@@ -113,73 +110,38 @@
 				// $this->insert_log('tambah data category_product');
 
 				redirect('admin/tourism_place/add', 'refresh');
-
 			}
-
 			else
-
 			{
-
 				$this->load->view($this->admin_template, $data);
-
 			}
-
 		}
-
-		
 
 		function delete($kode)
-
 		{
-
 			$this->insert_log('hapus data category_product dengan id : '.$kode);
-
-
-
 			$this->model_utama->delete_data($kode, 'category_product_id','category_product');
-
 			$this->session->set_flashdata('success', 'Data berhasil dihapus!');
-
 			redirect('admin/product_category');
-
 		}
 
-		
-
 		function update($kode)
-
 		{
-
 			$user_id 				= $this->session->userdata('id_user');
-
 			$judul					= $this->model_utama->get_detail('1','setting_id','setting')->row()->website_name;
-
-			$data['title'] 		= 'Halaman Ubah tourism_place | '.$judul;
-
+			$data['title'] 			= 'Halaman Ubah tourism_place | '.$judul;
 			$data['heading'] 		= 'Update tourism_place';
-
 			$data['form_action'] 	= site_url('admin/tourism_place/update_process');
 
-				
+			$wew = $this->model_utama->get_detail($kode, 'tourism_place_id', 'tourism_place')->row();
 
-			$wew = $this->model_utama->get_detail($kode, 'category_product_id', 'category_product')->row();
-
-			$this->session->set_userdata('kd_update', $wew->category_product_id);
-
-		
-
-			$data['default']['category_product_name']		 	= $wew->category_product_name;	
-
-			
-
-			$data['page']			= 'admin/product_category/page_form';
+			$this->session->set_userdata('kd_update', $wew->tourism_place_id);
+			$data['default']	 	= $wew;	
+			$data['page']			= 'admin/tourism_place/page_form';
 
 			$this->load->view($this->admin_template, $data);
 
-
-
-			$this->insert_log('klik ubah data category dengan id : '.$kode);
-
+			$this->insert_log('klik ubah wisata dengan id : '.$kode);
 		}
 
 		
