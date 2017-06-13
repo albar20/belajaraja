@@ -1,0 +1,42 @@
+#search_result{
+	position: fixed;
+	z-index: 1000;
+	display:  block;
+	width: 80%;
+	top: 20%;
+	border: 10px solid rgba(0, 0, 0, 0.3);
+	height: auto;
+	left: 10%;
+	right: 10%;
+	display: none;
+    box-shadow: 0px 0px 2px 2px #808080;
+    color: black;
+}
+
+#search_close{
+	cursor: pointer;
+    position: absolute;
+    right: 25px;
+    top: 5px;
+    z-index: 1100;
+    font-size: 15px;
+    color: gray;
+}
+
+#search_content {
+    height: auto;
+    min-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #fff ;
+    width: 100%;
+    margin: 0 auto;
+    max-height: 300px;
+    padding: 20px;
+    color: black;
+}
+#search_content .search_header{
+	font-size: 20px;
+	color: #0A2FCD;
+	text-decoration: underline;
+}

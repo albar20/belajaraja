@@ -1,0 +1,399 @@
+/* 
+	1.	GENERAL
+    2.  HEADER
+    2.  FOOTER
+	2.	KONTAK PAGE	
+	3.	BLOG 
+    4.  MY ACCOUNT
+    5.  PRODUCT
+    6.  page_transaction
+    7.  my_order
+    8.  responsive
+*/
+
+/*===================================================
+	1.	GENERAL
+		1.	PAGINATION 
+===================================================*/
+.alert{
+	text-align: center;
+	font-size: 20px;
+}
+.clear{
+	clear: both;
+	float: none;
+}
+.bold{
+    font-weight: bold;
+}
+.banner-image{
+    margin-left: auto;
+    margin-right: auto;
+}
+.slider-image{
+    width: 100% !important;
+}
+.fa-warning{
+    color: red;
+}
+.help-block{
+    border: 1px solid red;
+    padding: 10px;
+}
+.no-padding{
+    padding: 0;
+}
+
+/*===================================================
+    2.  HEADER
+===================================================*/
+.menu .fa-user{
+    font-size: 10px !important;
+    top: -1px;
+    position: relative;
+}
+.hcart .img-thumbnail{
+    width: 50px;
+}
+
+/*===================================================
+    2.  FOOTER
+===================================================*/
+.follow-us .fa{
+    width: 20px;
+
+}
+.footer_alamat{
+                color: inherit;
+                background-color: transparent !important;
+                border: 0 !important;
+                padding: 0 ;
+                overflow: inherit;
+            }
+
+
+/*===================================================
+	1.	PAGINATION 
+===================================================*/
+.pagination {
+    width: 100%;
+    float: left;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+.pagination ul {
+    float: left;
+    list-style: outside none none;
+    padding: 0px;
+    margin: 0px;
+}
+.pagination ul li {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.pagination ul li a {
+    display: inline-block;
+    color: #666;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    margin-right: 6px;
+    border: 1px solid #E0E0E0;
+    cursor: pointer;
+}
+.pagination-first a, .pagination-last a {
+    border: medium none;
+    line-height: 36px;
+    color: #FFF !important;
+    display: inline-block;
+    height: 40px;
+    min-width: 40px;
+    background-color: #999;
+    padding: 0px 10px;
+    width: auto !important;
+}
+
+
+/*===================================================
+	2.	KONTAK PAGE	
+===================================================*/
+.contact-info .tel a,
+.contact-info .email a{
+	color: #3F4444;
+}
+
+/*===================================================
+	3.	BLOG 
+===================================================*/
+.post_picture{
+	width:100%;
+}
+.comment-area{
+	margin-bottom: 50px;
+}
+.search-blog-wrapper{
+	padding: 0;
+}
+.nav-next{
+    float: right;
+}
+.comment_name_on_list{
+    font-weight: bold;
+}
+
+/*===================================================
+    4.  MY ACCOUNT
+===================================================*/
+.my_account_wrapper h2{
+    margin-top: 10px;
+}
+.my_account tr{
+    padding: 10px;
+}
+.my_account th,
+.my_account td{
+    padding: 10px;
+}
+.my_account .label{
+    color: #000 !important;
+}
+.my_account .alamat_header{
+    width: 500px;
+
+}
+.my_account .pengiriman_header{
+     width: 100px
+}
+.my_account .alamat_lengkap{
+    text-align: left;
+}
+.tambah_alamat_form{
+     display: none; 
+}
+.tambah_alamat_form td{
+    padding: 10px;
+}
+.tambah_alamat_form input,
+.tambah_alamat_form textarea,
+.tambah_alamat_form select{
+    min-width: 100%;
+}
+.tambah_alamat_form .head_one{
+   width: 200px;
+}
+.tambah_alamat_form .head_two{
+    width: 400px;
+}
+.my_account_wrapper #success_result{
+    display: none;
+}
+.order_id_dipemesanan{
+    color: blue;
+}
+
+
+
+/*===================================================
+    5.  PRODUCT
+===================================================*/
+.category-product{
+    cursor: pointer;
+}
+.sub-category-product{
+    display: none;
+    border: 0;
+    padding-bottom: 0;
+}
+.sub-category-product .fa-angle-right{
+   /*  margin-left: 15px; */
+}
+.genap{
+    background-color: #F3F3F3;
+}
+.product-filter h3{
+    margin: 10px 0;
+}
+.category_active{
+    color: #CB3737 !important;
+    display: block;
+}
+.related-product-price{
+    font-size: 14px !important;
+}
+#tab-description pre{
+    background-color: transparent;
+    border: 0;
+    line-height: inherit;
+    padding: 0;
+}
+.product-single-game_zone #tab-description pre,
+.product-single-jewellery #tab-description pre{
+    color: #fff;
+}
+
+
+
+/*===================================================
+    6.  page_transaction
+===================================================*/
+.page_transaction .control-label{
+    padding-top: 0;
+    font-weight: lighter;
+    color: #252A2F;
+}
+
+/*===================================================
+    7.  my_order
+===================================================*/
+.order_id_front{
+    font-size: 12px;
+}
+.mobile-order-products .first-row{
+    border-top:10px solid black;
+}
+.my_order_box{
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
+}
+.my_order_box h2,
+.my_order_box h3{
+    text-align: center;
+}
+.my_order_box .product-filter{
+    background-color: #ccc;
+}
+.digi .my_order_box .product-filter{
+    background-color: #252A2F;
+}
+.digi .my_order_box h2,
+.digi .my_order_box h3{
+    color: #fff;
+}
+
+.electro .my_order_box .product-filter{
+    background-color: #4BAC52;
+}
+.electro .my_order_box h2,
+.electro .my_order_box h3{
+    color: #fff;
+}
+.fashion .my_order_box .product-filter{
+    background-color: #CB3737;
+}
+.fashion .my_order_box h2,
+.fashion .my_order_box h3{
+    color: #fff;
+}
+.furniture .my_order_box .product-filter{
+    background-color: #967E4B;
+}
+.furniture .my_order_box h2,
+.furniture .my_order_box h3{
+    color: #fff;
+}
+.game-zone .my_order_box .product-filter{
+    background-color: #B61517;
+}
+.game-zone .my_order_box h2,
+.game-zone .my_order_box h3{
+    color: #fff;
+}
+.game-zone .mobile-order-products tr{
+    color: #fff;
+}
+
+.grocery .my_order_box .product-filter{
+    background-color: #252424;
+}
+.grocery .my_order_box h2,
+.grocery .my_order_box h3{
+    color: #fff;
+}
+.jewellery .my_order_box .product-filter{
+    background-color: #252424;
+}
+.jewellery .my_order_box h2,
+.jewellery .my_order_box h3{
+    color: #fff;
+}
+.kitchen .my_order_box .product-filter{
+    background-color: #383838;
+}
+.kitchen .my_order_box h2,
+.kitchen .my_order_box h3{
+    color: #fff;
+}
+.mobile_shoppe .my_order_box .product-filter{
+    background-color: #3498DB;
+}
+.mobile_shoppe .my_order_box h2,
+.mobile_shoppe .my_order_box h3{
+    color: #fff;
+}
+
+.shoppe .my_order_box .product-filter{
+    background-color: #9D6E47;
+}
+.shoppe .my_order_box h2,
+.shoppe .my_order_box h3{   
+    color: #fff;
+}
+.spice .my_order_box .product-filter{
+    background-color: #FFB400;
+}
+.spice .my_order_box h2,
+.spice .my_order_box h3{
+    color: #000;
+}
+.sports .my_order_box .product-filter{
+    background-color: #31A5BE;
+}
+.sports .my_order_box h2,
+.sports .my_order_box h3{
+    color: #fff;
+}
+
+/*===================================================
+    8.  responsive
+===================================================*/
+@media (max-width: 769px) {
+    
+    .xs500{
+        float: none !important;
+        clear: both !important;;
+        margin-left: auto !important;;
+        margin-right: auto !important;;
+        width: 100%;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+
+    
+}
+
+/*===================================================
+    9.  page review
+===================================================*/
+
+.rating
+{
+	color: rgb(239, 95, 150);
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 78px;
+	margin: 1.67em 0;
+}
+
+.btn-brown
+{
+	background-color: rgb(157, 110, 71);
+	color: white;
+}
+
+.btn-pink
+{
+	background-color: rgb(239, 95, 150);
+	color: white;
+}

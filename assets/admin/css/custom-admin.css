@@ -1,0 +1,62 @@
+/*=============================================  
+	1.	GENERAL
+	1.	ORDER & TRACKING 
+		1.	LIHAT PEMESANAN
+=============================================*/
+
+/*=============================================  
+	1.	GENERAL
+=============================================*/
+.clear{
+	float:none;
+	clear:both;
+}
+.color_red{
+                color: red;
+            }
+.color_yellow{
+                color: #F90;
+            }
+
+
+
+
+/*=============================================  
+	1.	LIHAT PEMESANAN
+=============================================*/
+.order-lihat-pemesanan h2{
+    padding: 10px;
+    background-color: rgb(85, 85, 85);
+    color: #fff;
+    font-weight: bold;
+}
+.order-lihat-pemesanan .konfirmasi_button{
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                display: inherit;
+                width: 400px;
+                padding: 20px;
+                font-size: 25px;
+            }
+
+.order-lihat-pemesanan .konfirmasi_button,
+            .konfirmasi_pembayaran .konfirmasi_button{
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                width: 200px;
+                padding: 20px;
+                font-size: 25px;
+            }
+            .order-lihat-pemesanan .konfirmasi_button{
+                display: inherit;
+            }
+            .konfirmasi_pembayaran .konfirmasi-button-wrap{
+                text-align: center;
+            }
+            .konfirmasi_pembayaran .konfirmasi_button{
+                display: inline-block;
+            }
+
+

@@ -1,0 +1,2 @@
+
+jQuery(document).ready(function($){$(window).load(function(){$("#sort_product,#show_total_product").change(function(){$("#sort_form").submit();});$(".category-product").click(function(event){$(".sub-category-product").css('display','none');$(this).find('.sub-category-product').css('display','block');});});});

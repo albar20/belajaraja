@@ -1,0 +1,19 @@
+.display{
+	width: 100% !important;
+}
+
+table.dataTable thead .sorting_asc::after {
+	content: "";
+}
+table.dataTable thead .sorting::after {
+    content: "";
+}
+
+.datatables-wrapper{
+	float: none;
+	clear: both;
+	margin-left: auto;
+	margin-right: auto;
+	width: 95%; 
+	position: relative;
+}

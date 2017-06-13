@@ -1,0 +1,43 @@
+[16-Jan-2017 17:07:05 Asia/Bangkok] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32 bytes) in /home/fitinbea/public_html/testing/system/database/drivers/mysqli/mysqli_result.php on line 365
+[17-Jan-2017 09:06:27 Asia/Bangkok] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32 bytes) in /home/fitinbea/public_html/testing/system/database/drivers/mysqli/mysqli_result.php on line 365
+[17-Jan-2017 09:23:35 Asia/Bangkok] PHP Fatal error:  Call to undefined method product::product_pagination_helper() in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 19
+[17-Jan-2017 09:24:47 Asia/Bangkok] PHP Fatal error:  Call to undefined method product::product_pagination_helper() in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 19
+[17-Jan-2017 02:39:30 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 13
+[17-Jan-2017 02:40:36 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 13
+[17-Jan-2017 09:47:12 Asia/Bangkok] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/fitinbea/public_html/testing/application/views/admin/product/page_list.php on line 32
+[17-Jan-2017 09:49:07 Asia/Bangkok] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/fitinbea/public_html/testing/application/views/admin/product/page_list.php on line 32
+[17-Jan-2017 09:49:52 Asia/Bangkok] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/fitinbea/public_html/testing/application/views/admin/product/page_list.php on line 32
+[17-Jan-2017 09:49:53 Asia/Bangkok] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/fitinbea/public_html/testing/application/views/admin/product/page_list.php on line 32
+[17-Jan-2017 09:50:30 Asia/Bangkok] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/fitinbea/public_html/testing/application/views/admin/product/page_list.php on line 32
+[17-Jan-2017 09:50:33 Asia/Bangkok] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/fitinbea/public_html/testing/application/views/admin/product/page_list.php on line 32
+[17-Jan-2017 02:53:58 UTC] PHP Parse error:  syntax error, unexpected ''$wew->subcategory_product_id'' (T_CONSTANT_ENCAPSED_STRING) in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 182
+[17-Jan-2017 04:31:09 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:31:20 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:31:21 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:31:40 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:31:43 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:32:09 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:32:10 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:32:11 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:32:11 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:32:53 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 55
+[17-Jan-2017 04:33:27 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 1
+[17-Jan-2017 04:33:29 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 1
+[17-Jan-2017 04:33:58 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 1
+[17-Jan-2017 04:34:33 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 1
+[17-Jan-2017 04:35:19 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 254
+[17-Jan-2017 11:40:48 Asia/Bangkok] PHP Fatal error:  Call to a member function row() on a non-object in /home/fitinbea/public_html/testing/application/controllers/admin/Product.php on line 329
+[07-Feb-2017 04:21:01 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 267
+[07-Feb-2017 04:21:58 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 267
+[07-Feb-2017 04:23:09 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 1
+[07-Feb-2017 04:23:15 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 1
+[07-Feb-2017 04:23:15 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 1
+[07-Feb-2017 04:23:42 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 1
+[07-Feb-2017 04:24:47 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 1
+[07-Feb-2017 07:02:27 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 6
+[07-Feb-2017 07:06:42 UTC] PHP Parse error:  syntax error, unexpected '$rating' (T_VARIABLE) in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 280
+[07-Feb-2017 07:06:44 UTC] PHP Parse error:  syntax error, unexpected '$rating' (T_VARIABLE) in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 280
+[07-Feb-2017 14:50:30 Asia/Bangkok] PHP Fatal error:  Call to undefined method CI_Security::xss_celan() in /home/fitinbea/public_html/testing/application/controllers/Product.php on line 844
+[15-Feb-2017 15:18:59 Asia/Bangkok] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/fitinbea/public_html/testing/application/views/main/ecommerce_template/spice_template/product/review.php on line 152
+[15-Feb-2017 15:19:44 Asia/Bangkok] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/fitinbea/public_html/testing/application/views/main/ecommerce_template/spice_template/product/review.php on line 171
+[15-Feb-2017 15:19:46 Asia/Bangkok] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/fitinbea/public_html/testing/application/views/main/ecommerce_template/spice_template/product/review.php on line 171

@@ -1,0 +1,68 @@
+.hotel-booking-search {
+	position:      relative;
+	margin-bottom: 3px;
+	margin:        0 -10px;
+	form {
+		display: block;
+		padding: 30px 0;
+		margin:  0 auto;
+		@include clearfix();
+		button {
+			width:          100%;
+			padding:        9px 8px 5px 8px;
+			border:         none;
+			color:          #333;
+			text-transform: uppercase;
+			box-shadow:     0 2px 0 0 #c6a615;
+			&:hover {
+				color: #fff;
+			}
+		}
+	}
+	.hb-form-table li {
+		width:   25%;
+		padding: 0 10px;
+		margin:  0;
+		float:   left;
+	}
+	.hb-submit {
+		width:   20%;
+		padding: 0 10px;
+		margin:  0;
+		float:   left;
+	}
+	.hb-form-table {
+		@include clearfix();
+		width:  80%;
+		float:  left;
+		margin: 0;
+	}
+	.hb-form-field {
+		position: relative;
+		display:  inline-block;
+		input, select, button, textarea {
+			outline:            0;
+			position:           relative;
+			width:              100%;
+			height:             40px;
+			border:             none;
+			background:         #fff;
+			color:              #333;
+			border-radius:      0;
+			padding:            7px 8px;
+			line-height:        24px;
+			-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			-o-transition:      border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			transition:         border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			@include placeholder-color(#555);
+		}
+	}
+}
+
+.slider-tour-booking {
+	margin-top: -135px;
+	position:   relative;
+	.vc_column-inner {
+		padding-top: 0 !important;
+	}
+}

@@ -1,0 +1,19 @@
+@media (max-width: 320px) {
+
+	.comments-area .comment-respond .comment-reply-title {
+		padding: 0 20px;
+	}
+	.comments-area .comment-list-inner .comments-title {
+		font-size: 20px;
+	}
+
+	.comments-area .comment-list-inner li .comment-extra-info .text-right a {
+		background: transparent;
+		padding:    0;
+		&:hover {
+			background: transparent !important;
+			color:      inherit !important;
+		}
+	}
+
+}

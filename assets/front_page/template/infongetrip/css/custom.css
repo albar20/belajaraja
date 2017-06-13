@@ -1,0 +1,12 @@
+	.login-btm{
+		margin-top: 10px;
+	}
+	.btn-login{
+		background-color: #2a2a2a;
+		width: 134px;
+		margin-left: 127px;
+		color: white;
+	}
+	.btn-login:hover{
+		background-color: #ffb300;
+	}

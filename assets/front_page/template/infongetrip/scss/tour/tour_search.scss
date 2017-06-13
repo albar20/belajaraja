@@ -1,0 +1,39 @@
+.widget-area {
+	.search_tour {
+		text-align:    center;
+		@include clearfix();
+		border-radius: 3px;
+		padding:       20px;
+		color:         #fff;
+		.form-block_title {
+			margin-top:    5px;
+			color:         #fff;
+			margin-bottom: 5px;
+			font-weight:   700;
+		}
+		.form-block__description {
+			margin-bottom: 20px;
+		}
+		input, select, button {
+			width:         100%;
+			margin-bottom: 15px;
+			background:    rgba(255, 255, 255, 0.9);
+			@include transition(all 0.1s ease-in-out);
+			border:        none;
+			border-radius: 3px;
+			height:        45px;
+			line-height:   21px;
+			padding:       12px 15px;
+			&:focus {
+				background: #fff;
+				outline:    none;
+			}
+		}
+		button {
+			color:          #fff;
+			text-transform: uppercase;
+			font-weight:    700;
+			margin-bottom:  0;
+		}
+	}
+}
