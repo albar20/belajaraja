@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
+$route['user']					= 'user';
 $route['admin'] 						= 'admin_login';
 $route['admin_login/login_process'] 	= 'admin_login/login_process';
 $route['regis_user/captcha'] = "regis_user/captcha";
@@ -85,6 +85,9 @@ $route['google'] 				= "google";
 $route['fetch'] 				= "fetch";
 $route['tour']					= "tour";
 $route['review']				= "review";
+$route['user/update_user']		= 'user/update_user';
+$route['user/do_update_user']	= 'user/do_update_user';
+$route['user/show_user']		='user/show_user';
 $route['regis_user']  			= "regis_user";
 $route['regis_user/lost_password'] = "regis_user/lost_password";
 $route['oauth2callback']		= 'google/index';

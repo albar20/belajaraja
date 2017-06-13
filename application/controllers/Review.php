@@ -14,7 +14,11 @@ class Review extends MY_Controller {
 	
 	function index()
 	{
-		redirect(base_url());
+		$judul				= $this->setting->website_name;
+		$data['judul'] 		= ''.$judul;
+		$data['title'] 		= $data['judul'];
+		$data['page']		= $this->front_folder.$this->themes_folder_name.'/page_review';
+		$this->load->view($this->front_end_template, $data);
 	}
 	
 	function add($tour_slug="")
