@@ -54,6 +54,7 @@ class MY_Controller extends CI_Controller {
         /*===============================================
             1.  SET VARIABLE 
         ===============================================*/
+        $this->load->helper('tanggal');
         $this->load->helper('captcha');
         $this->load->library('email');
         

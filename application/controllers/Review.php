@@ -15,12 +15,81 @@ class Review extends MY_Controller {
 	function index()
 	{
 		$judul				= $this->setting->website_name;
+		$user_id 			= $this->session->userdata('user_id_user');
 		$data['judul'] 		= ''.$judul;
 		$data['title'] 		= $data['judul'];
 		$data['page']		= $this->front_folder.$this->themes_folder_name.'/page_review';
+		$config['base_url'] = base_url().'review/page';
+		$sql_all 			= "SELECT * FROM tour_review WHERE user_id = $user_id";
+		$config['total_rows'] = $this->db->query($sql_all)->num_rows();
+		$config['per_page']	= 4;
+		$config['uri_segment'] = 3;
+		$config['num_links'] = 2;
+		$config['attributes'] = array('class' => 'page-numbers');
+		$config['full_tag_open'] 	= '<ul class="page-numbers">';
+		$config['full_tag_close'] 	= '<ul>';
+		$config['first_tag_open'] 	= '<li>';
+		$config['first_tag_close'] 	= '</li>';
+		$config['last_tag_open'] 	= '<li>';
+		$config['last_tag_close'] 	= '</li>';
+		$config['next_tag_open'] 	= '<li>';
+		$config['next_tag_close'] 	= '</li>';
+		$config['prev_tag_open'] 	= '<li>';
+		$config['prev_tag_close'] 	= '</li>';
+		$config['cur_tag_open'] 	= '<li><span class="page-numbers current">';
+		$config['cur_tag_close'] 	= '</span></li>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$sql 			= "SELECT * FROM tour_review WHERE user_id = $user_id LIMIT $page,".$config['per_page'];		
+		$data['review']     = $this->db->query($sql)->result();
+
+
 		$this->load->view($this->front_end_template, $data);
 	}
-	
+
+
+	function page(){
+		$judul				= $this->setting->website_name;
+		$user_id 			= $this->session->userdata('user_id_user');
+		$data['judul'] 		= ''.$judul;
+		$data['title'] 		= $data['judul'];
+		$data['page']		= $this->front_folder.$this->themes_folder_name.'/page_review';
+		$config['base_url'] = base_url().'review/page';
+		$sql_all 			= "SELECT * FROM tour_review WHERE user_id = $user_id";
+		$config['total_rows'] = $this->db->query($sql_all)->num_rows();
+		$config['per_page']	= 4;
+		$config['uri_segment'] = 3;
+		$config['num_links'] = 2;
+		$config['attributes'] = array('class' => 'page-numbers');
+		$config['full_tag_open'] 	= '<ul class="page-numbers">';
+		$config['full_tag_close'] 	= '<ul>';
+		$config['first_tag_open'] 	= '<li>';
+		$config['first_tag_close'] 	= '</li>';
+		$config['last_tag_open'] 	= '<li>';
+		$config['last_tag_close'] 	= '</li>';
+		$config['next_tag_open'] 	= '<li>';
+		$config['next_tag_close'] 	= '</li>';
+		$config['prev_tag_open'] 	= '<li>';
+		$config['prev_tag_close'] 	= '</li>';
+		$config['cur_tag_open'] 	= '<li><span class="page-numbers current">';
+		$config['cur_tag_close'] 	= '</span></li>';
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+
+		$this->pagination->initialize($config);
+		$page 				= ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$sql 				= "SELECT * FROM tour_review WHERE user_id = $user_id LIMIT $page,".$config['per_page'];		
+		$data['review']     = $this->db->query($sql)->result();
+
+
+		$this->load->view($this->front_end_template, $data);
+	}
+
+
+
 	function add($tour_slug="")
 	{
 		//$user_id		= $this->session->userdata('user_id_user');

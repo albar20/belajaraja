@@ -52,4 +52,34 @@ function show_user(){
 				}
 			})
 		});
+
+
+$(".page_user").click(function(event) {
+	 // var link =  $(this).attr('link');
+	 // alert(link);
+	 $.ajax({
+	 	type : "POST",
+	 	url : baseurl + "user/paging",
+	 	data : "link=" + $(this).attr('link'),
+	 	success : function(res){
+	 		$(".paging_user").html(res);
+	 	}	
+	 })
+});
+
+$(".link-review").click(function(event) {
+	var link = $(this).attr('link');
+	$.ajax({
+		type : "POST",
+		url : baseurl + "review/paging_review",
+		data : "link=" + $(this).attr('link'),
+		success : function(res){
+			var links = "#link" + link; 
+			// $(link).addClass('tes');
+			$(links).addClass('active');
+			$(".paging-review").html(res);
+		}
+	})
+});
+
 	});

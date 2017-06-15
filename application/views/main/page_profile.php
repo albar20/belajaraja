@@ -31,6 +31,8 @@
 								</div>
 							</div>	
 							<div class="rank">Recent Review</div>
+							<?php foreach ($paging as $rev ) {
+							?>
 							<div class="review-user">
 										<div class="res">
 									<h4 class="title-rev"> Teluk Kiluan</h4>
@@ -40,15 +42,7 @@
 									<p class="place-rev"> <i class="fa fa-map-marker marker" aria-hidden="true"></i> Lampung selatan, Sumatera Selatan / Jan 2017 </p>
 									<hr>
 							</div>
-										<div class="review-user">
-										<div class="res">
-									<h4 class="title-rev">Ancol</h4>
-								 <a href="">	<i class="when"> Read More </i> </a>
-									</div>
-									<div class="cleaner"></div>
-									<p class="place-rev"> <i class="fa fa-map-marker marker" aria-hidden="true"></i> Jakarta Utara, Dki Jakarta / Maret 2017 </p>
-									<hr>
-							</div>
+							<?php } ?>
 	</div>
 	<div class="col-md-8">
 		<div class="line-header">

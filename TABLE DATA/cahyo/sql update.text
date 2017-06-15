@@ -1,1 +1,7 @@
 ALTER TABLE `user` ADD `email_code` VARCHAR(250) NOT NULL AFTER `picture`;
+
+10/06/2017
+ALTER TABLE `user` ADD `phone` INT(20) NOT NULL AFTER `email_code`, ADD `address` TEXT NOT NULL AFTER `phone`, ADD `site` VARCHAR(200) NOT NULL AFTER `address`, ADD `birthday` VARCHAR(200) NOT NULL AFTER `site`, ADD `Gender` VARCHAR(10) NOT NULL AFTER `birthday`;
+10/06/2017
+ALTER TABLE `user` ADD `job` VARCHAR(200) NOT NULL AFTER `Gender`;
+ALTER TABLE `user` ADD `location` VARCHAR(200) NOT NULL AFTER `job`;

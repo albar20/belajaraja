@@ -96,6 +96,7 @@ $route['regis_user/do_lost_password'] = "regis_user/do_lost_password";
 $route['kursus/(:any)'] 		= "kursus/$1";
 // $route['blog/(:any)'] 			= "blog/$1";
 $route['category/(:any)'] 		= "category/$1";
+$route['review/page/(:any)']	= 'review/page/$1';
 $route['galeri/(:any)'] 		= "galeri/$1";
 $route['home/(:any)'] 			= "home/$1";
 $route['login/(:any)'] 			= "login/$1";
@@ -111,10 +112,10 @@ $route['tour/page/(:any)']		= "tour/page/$1";
 $route['tour/(:any)']			= "tour/$1";
 $route['review/add/(:any)']		= "review/add/$1";
 $route['review/(:any)']			= "review/$1";
-
+$route['review/paging_review']	= 'review/paging_review';
 $route['custom_search_test'] 			= 'custom_search_test';
 $route['ajax/search'] 					= 'ajax/search';
-
+$route['user/paging']			= 'user/paging';
 $route['my_account'] 							= 'my_account';
 $route['my_account/edit'] 						= 'my_account/edit';
 $route['my_account/hapus_alamat/(:any)'] 		= 'my_account/hapus_alamat/$1';

@@ -24,7 +24,8 @@
     <li><a href="#">Beach</a></li>
     <li><a href="#">Island</a></li>
     <li ><a href="#"> Place </a></li>        
-  </ul>
+  </ul>	
+  <div class="table-reponsive paging-review">
 		  <table class="table table-condensed review">
 			<thead>
 				<tr>
@@ -36,33 +37,56 @@
 					<th class="helpfull">Helpful Votes</th>
 					<th class="points">Points</th>
 				</tr>
+
+				<?php foreach ($review as $rev) {?>
 				<tr>
-					<td><img class="image_review" src="<?php echo base_url() ?>uploads/wisata/asdasdsad/thumb/thumb_11DreadOut_branding_image.jpg"></td>
+					<td>  <img class="image_review" src="<?php echo base_url() ?>uploads/wisata/asdasdsad/thumb/thumb_11DreadOut_branding_image.jpg"></td>
 					<td class="desc">
 							<a href=""><i class="fa fa-map-marker" aria-hidden="true"></i>
- Barcelona: Hotel The Serras</a>
-								<h3> <i> "Stunning Hotel" </i> </h3>
-								<p>Top-notch hotel in a beautiful location. The staf...</p>
-								<b><i class="fa fa-calendar" aria-hidden="true"></i>
- Jun 12, 2017 </b> </td>
-					<td class="rating">
 						
-							<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+ Barcelona: Hotel The Serras</a>
+								<h3> <i> "<?php echo $rev->judul; ?>" </i> </h3>
+								<p><?php echo $rev->review; ?></p>
+								<b><i class="fa fa-calendar" aria-hidden="true"></i>
+ <?php echo date('d F Y', strtotime($rev->create_date))?> </b> </td>
+					<td class="rating">
+						<h2> <?php echo $rev->rate; ?> </h2>
+						<?php 															
+																	for($i=1;$i<=$rev->rate;$i++){?>
+																	<i class="fa fa-star"></i>
+																<?php } ?>	
+																<?php if($rev->rate < $i and $rev->rate > $i-1){
+																?>
+																<i class="fa fa-star-half-o"></i>
+																<?php } 
+																	for($j=$i;$j<5;$j++){
+																?>	
+																	<i class="fa fa-star-o"></i>
+																<?php } ?>
+
 						
 					</td>
 					<td class="help"> <h3>10 <i class="fa fa-thumbs-up" aria-hidden="true"></i></h3> </td>
 					<td class="points"> <h3>100</h3> </td>
 				</tr>
+				<?php } ?>
+
 
 			</thead>
 		</table>
-<div class="pagination">
-  <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a href="#" class="active">2</a>
-  <a href="#">3</a>
-  <a href="#">&raquo;</a>
-</div>
+		</div>
+		
+		<div class="navigation paging-navigation" role="navigation">
+							<?php echo $this->pagination->create_links(); ?>
+							<!--<ul class="page-numbers">
+								<li><span class="page-numbers current">1</span></li>
+								<li><a class="page-numbers" href="#">2</a></li>
+								<li><a class="next page-numbers" href="#"><i class="fa fa-long-arrow-right"></i></a>
+								</li>
+							</ul>-->
+						</div>
+		
+
 
 
 		</div>
