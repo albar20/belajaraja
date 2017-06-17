@@ -15,3 +15,15 @@ function terimaKasih(id)
 		}
 	});
 }
+
+function ambil_kota(id)
+{
+	$.ajax({
+		type	: "post",
+		url		: baseurl+"rekomendasi/ambil_kota/"+id,
+		success : function(res)
+		{
+			$("#city").html(res);
+		}
+	})
+}
