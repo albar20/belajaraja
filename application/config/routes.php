@@ -205,7 +205,8 @@ $route['admin/seller/update_process'] 				= 'admin/seller/update_process';
 $route['admin/coupon'] 								= 'admin/coupon';
 $route['admin/coupon/(:any)'] 						= "admin/coupon/$1";
 $route['admin/tourism_place/(:any)'] 						= "admin/tourism_place/$1";
-
+$route['user/show_provinsi']						= "user/show_provinsi";
+$route['user/show_desa']							= "user/show_desa";
 
 $route['(:any)'] 						= 'page/detail';
 $route['(:any)/(:any)']					= 'page/detail';

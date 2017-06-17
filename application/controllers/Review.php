@@ -22,7 +22,7 @@ class Review extends MY_Controller {
 		$config['base_url'] = base_url().'review/page';
 		$sql_all 			= "SELECT * FROM tour_review WHERE user_id = $user_id";
 		$config['total_rows'] = $this->db->query($sql_all)->num_rows();
-		$config['per_page']	= 4;
+		$config['per_page']	= 1;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 2;
 		$config['attributes'] = array('class' => 'page-numbers');
@@ -40,18 +40,20 @@ class Review extends MY_Controller {
 		$config['cur_tag_close'] 	= '</span></li>';
 		$config['num_tag_open'] 	= '<li>';
 		$config['num_tag_close'] 	= '</li>';
-
+		$data['total_rows'] = $this->db->query($sql_all)->num_rows();
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$sql 			= "SELECT * FROM tour_review WHERE user_id = $user_id LIMIT $page,".$config['per_page'];		
+		$sql 			= "SELECT * FROM tour_review WHERE user_id = $user_id LIMIT $page,".$config['per_page'];
+		$data['user']       = $this->db->get_where('user',array('user_id' => $this->session->userdata('user_id_user')))->row();		
 		$data['review']     = $this->db->query($sql)->result();
-
+		$data['page_menu']		= 'main/infongetrip_template/review_page';
 
 		$this->load->view($this->front_end_template, $data);
 	}
 
 
 	function page(){
+		$this->load->library('pagination');
 		$judul				= $this->setting->website_name;
 		$user_id 			= $this->session->userdata('user_id_user');
 		$data['judul'] 		= ''.$judul;
@@ -60,7 +62,8 @@ class Review extends MY_Controller {
 		$config['base_url'] = base_url().'review/page';
 		$sql_all 			= "SELECT * FROM tour_review WHERE user_id = $user_id";
 		$config['total_rows'] = $this->db->query($sql_all)->num_rows();
-		$config['per_page']	= 4;
+		$data['total_rows'] = $this->db->query($sql_all)->num_rows();
+		$config['per_page']	= 1;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 2;
 		$config['attributes'] = array('class' => 'page-numbers');
@@ -83,7 +86,8 @@ class Review extends MY_Controller {
 		$page 				= ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$sql 				= "SELECT * FROM tour_review WHERE user_id = $user_id LIMIT $page,".$config['per_page'];		
 		$data['review']     = $this->db->query($sql)->result();
-
+		$data['user']       = $this->db->get_where('user',array('user_id' => $this->session->userdata('user_id_user')))->row();
+		$data['page_menu']		= 'main/infongetrip_template/review_page';
 
 		$this->load->view($this->front_end_template, $data);
 	}

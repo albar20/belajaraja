@@ -64,42 +64,30 @@
 							<div class="form-block block-after-indent">
 								<h3 class="form-block_title">Search Tour</h3>
 								<div class="form-block__description">Find your dream tour today!</div>
-								<form method="get" action="#">
+								<?php echo form_open('tour'); ?>
 									<input type="hidden" name="tour_search" value="1">
 									<input type="text" placeholder="Search Tour" value="" name="name_tour">
-									<select name="tourtax[tour_phys]">
-										<option value="0">Tour Type</option>
-										<option value="escorted-tour">Escorted Tour</option>
-										<option value="rail-tour">Rail Tour</option>
-										<option value="river-cruise">River Cruise</option>
-										<option value="tour-cruise">Tour &amp; Cruise</option>
-										<option value="wildlife">Wildlife</option>
+
+									<select id="cari" name="cari">
+										<option value="">Cari Berdasarkan</option>
+										<option value="kota">Kota</option>
+										<option value="provinsi">Provinsi</option>
 									</select>
-									<select name="tourtax[pa_destination]">
-										<option value="0">Destination</option>
-										<option value="china">Brazil</option>
-										<option value="canada">Canada</option>
-										<option value="cuba">Cuba</option>
-										<option value="italy">Italy</option>
-										<option value="philippines">Philippines</option>
-										<option value="usa">USA</option>
+										
+									<select id="provinsi" name="provinsi">
+										<option value="0">Pilih Provinsi</option>
+										<?php foreach ($prov as $row) {
+										?>
+										<option value="<?php echo $row->id; ?>"><?php echo ucwords($row->name) ; ?></option>
+										<?php } ?>
 									</select>
-									<select name="tourtax[pa_month]">
-										<option value="0">Month</option>
-										<option value="january">January</option>
-										<option value="february">February</option>
-										<option value="march">March</option>
-										<option value="april">April</option>
-										<option value="may">May</option>
-										<option value="june">June</option>
-										<option value="july">July</option>
-										<option value="august">August</option>
-										<option value="september">September</option>
-										<option value="october">October</option>
-										<option value="november">November</option>
-										<option value="december">December</option>
+									<select name="kota" id="kota">
+										<option value="0">Pilih kota</option>
 									</select>
-									<button type="submit">Find Tours</button>
+									<select name="tourtax[pa_month]" id="desa">
+										<option value="0">Desa</option>
+									</select>
+									<button type="submit" name="find">Find Tours</button>
 								</form>
 							</div>
 						</div>

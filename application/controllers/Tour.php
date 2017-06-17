@@ -16,22 +16,59 @@ class Tour extends MY_Controller {
 		$data['page']		= $this->front_folder.$this->themes_folder_name.'/tour/page_tour_list';
 		$start				= 0;
 		$limit 				= 9;
-		
+		$data['prov']		= $this->db->get('location_provinces')->result();
 		/*====================================================
 			1.	Get Tour
 		====================================================*/
-		
-		$sql = $this->tour_sql_helper(	$start, 
-												$limit );
+		//echo $_POST['provinsi'];
+
+		if (isset($_POST['find']) && isset($_POST['provinsi']) && $_POST['provinsi']>0) {
+			$provinsi = $_POST['provinsi'];
+			$search =  $_POST['name_tour'];
+			$kota = $_POST['kota'];
+
+			if ($_POST['cari'] == 'provinsi') {
+			 $sql    =   "SELECT 
+                        *,
+						(select count(*) as total_review from tour_review where tourism_place_id = tourism_place.tourism_place_id) as total_review,
+						(select sum(rate) as nilai_rating from tour_review where tourism_place_id = tourism_place.tourism_place_id) as nilai_rating
+                    FROM tourism_place WHERE name LIKE '%$search%' AND province_id =".$_POST['provinsi']
+                    ." ORDER BY create_date DESC". 
+                    "  LIMIT ".$start.",".$limit;
+               $sql_numrows = "WHERE name LIKE '%$search%' AND province_id =".$_POST['provinsi'];
+              }elseif ($_POST['cari'] == 'kota') {
+	         	$sql    =   "SELECT *, (select count(*) as total_review from tour_review where tourism_place_id = tourism_place.tourism_place_id) as 
+	         	total_review, (select sum(rate) as nilai_rating from tour_review where tourism_place_id = tourism_place.tourism_place_id) as nilai_rating FROM
+	         	 tourism_place WHERE name LIKE '%$search%' AND province_id =$provinsi AND city_id = $kota ORDER BY create_date DESC LIMIT $start,$limit ";
+	         	$sql_numrows = "WHERE name LIKE '%$search%' AND province_id =$provinsi AND city_id = $kota";
+              }
+
+		} elseif (isset($_POST['find'])) {
+			$search =  $_POST['name_tour'];
+
+		$sql    =   "SELECT 
+                        *,
+						(select count(*) as total_review from tour_review where tourism_place_id = tourism_place.tourism_place_id) as total_review,
+						(select sum(rate) as nilai_rating from tour_review where tourism_place_id = tourism_place.tourism_place_id) as nilai_rating
+                    FROM tourism_place WHERE name LIKE '%$search%' "
+                    ." ORDER BY create_date DESC". 
+                    "  LIMIT ".$start.",".$limit;
+            $sql_numrows = "WHERE name LIKE '%$search%'";
+		}else{
+			$sql = $this->tour_sql_helper(	$start,$limit );
+			$sql_numrows = "";			
+		}
+
+
 
 		$data['tour_list']	= $this->db->query($sql);		
 												
 		/*====================================================
 			2.	PAGINATION STRUCTURE
 		====================================================*/
-
+		$sqlr = "select count(*) as total from tourism_place ".$sql_numrows;
 		$base_url 		= 	base_url().'tour/page';
-		$total_row 		=	$this->db->query("select count(*) as total from tourism_place")->row()->total;
+		$total_row 		=	$this->db->query($sqlr)->row()->total;
 		$uri_segment	= 	3;
 
 		$this->tour_pagination_helper(	$limit,
@@ -41,6 +78,8 @@ class Tour extends MY_Controller {
 											);										
 		
 		//$data['best_seller'] 	= $this->get_best_seller_helper($limit);
+
+	
 
 		$this->load->view($this->front_end_template, $data);
 		$this->log_visitor('lihat halaman home');		
@@ -167,6 +206,20 @@ class Tour extends MY_Controller {
 
 		$this->pagination->initialize($config); 
 
+	}
+
+	public function show_provinsi(){
+		$prov = $this->db->get_where('location_city',array('province_id'=>$this->input->post('id_provinsi')))->result();
+		foreach ($prov as $row) {
+			echo "<option value='$row->id'> $row->name  </option>";
+		}
+	}
+
+	public function show_desa(){
+			$desa = $this->db->get_where('location_districts',array('regency_id'=>$this->input->post('id_kota')))->result();
+		foreach ($desa as $row) {
+			echo "<option value='$row->id'> $row->name  </option>";
+		}
 	}
 	
 }

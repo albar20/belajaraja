@@ -1,3 +1,4 @@
+
 function show_user(){
 	$.ajax({
 		type : "POST",
@@ -9,6 +10,49 @@ function show_user(){
 }
 
 	$(document).ready(function() {
+
+$("#provinsi").hide();
+$("#desa").hide();
+$("#kota").hide();
+
+$("#cari").change(function(event) {
+	if ($("#cari").val() == 'kota') {
+		
+		$("#kota").show();
+		$("#provinsi").show();
+		$("#desa").hide();
+	}
+	if ($("#cari").val() == 'provinsi') {
+		$("#kota").hide();       
+		$("#provinsi").show();
+		$("#desa").hide();
+	}
+});
+
+		$("#provinsi").change(function(event) {
+			$.ajax({
+				type : "POST",
+				url : baseurl + "tour/show_provinsi",
+				data : "id_provinsi=" + $("#provinsi").val(),
+				success : function(res){
+					$("#kota").html(res);
+				} 
+
+			})
+		});
+
+		$("#kota").change(function(event) {
+			//alert($("#kota").val());
+			$.ajax({
+			type : "POST",
+			url : baseurl + "tour/show_desa",
+			data : "id_kota=" + $("#kota").val(),
+			success : function(res){
+				$("#desa").html(res);
+			} 
+		});
+		});
+
 		show_user();
 		$("#save_user").hide();
 		$(".update-table").hide();
@@ -81,5 +125,7 @@ $(".link-review").click(function(event) {
 		}
 	})
 });
+
+
 
 	});
