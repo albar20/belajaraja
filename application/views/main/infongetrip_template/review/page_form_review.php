@@ -53,7 +53,7 @@
 											<div class="description">
 												<p><?php echo $tour->description?></p>
 											</div>
-											<span class="post_date">5 DAYS 4 NIGHTS</span></div>
+										</div>
 										<div class="content-right">
 											<div class="item_rating">
 												<div class="item_rating">
@@ -61,8 +61,14 @@
 														<i class="fa fa-star" aria-hidden="true"></i>
 													<?php } ?>	
 													<?php if($tour_rating < $i and $tour_rating > $i-1){
+														$i++;
 													?>
 													<i class="fa fa-star-half" aria-hidden="true"></i>
+													<?php } ?>
+													<?php 
+														for($j=$i;$j<=5;$j++){
+													?>	
+														<i class="fa fa-star-o"></i>
 													<?php } ?>
 												</div>
 											</div>
@@ -98,6 +104,7 @@
 												</p>
 												<p class="form-submit">
 													<input name="submit" type="submit" id="submit" class="submit" value="Submit">
+													<a href="<?php echo base_url()?>tour/detail/<?php echo $tour->slug?>" class="btn btn-danger">Batal</a>
 												</p></form>
 										</div>
 									</div>

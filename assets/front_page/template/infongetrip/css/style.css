@@ -6510,7 +6510,7 @@ input[type=radio]:checked:before {
 
 .flexslider ul.slides li a img {
 	width:  100%;
-	height: auto;
+	max-height: 500px;
 }
 
 .flexslider ol.flex-control-nav {
@@ -8867,6 +8867,18 @@ input[type=radio]:checked:before {
 .button-terimakasih{
 	border: 3px solid #ffb300;
 	color: #ffb300;
+	display: block;
+	position: relative;
+	padding: 4px 8.5px;
+	background-color: transparent;
+	overflow: hidden;
+	cursor: pointer;
+	margin-bottom:10px
+}
+
+.button-sudah-terimakasih{
+	border: 3px solid #3dd80e;
+	color: #3dd80e;
 	display: block;
 	position: relative;
 	padding: 4px 8.5px;

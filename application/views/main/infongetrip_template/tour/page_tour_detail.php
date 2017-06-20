@@ -30,6 +30,16 @@
 										<a href="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_3?>" class="swipebox" title=""><img width="950" height="550" src="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_3?>" class="wp-post-image" alt="" title="" draggable="false"></a>
 									</li>
 								<?php } ?>	
+								<?php if($tour->picture_4 != ''){ ?>	
+									<li>
+										<a href="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_4?>" class="swipebox" title=""><img width="950" height="550" src="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_4?>" class="wp-post-image" alt="" title="" draggable="false"></a>
+									</li>
+								<?php } ?>	
+								<?php if($tour->picture_5 != ''){ ?>	
+									<li>
+										<a href="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_5?>" class="swipebox" title=""><img width="950" height="550" src="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_5?>" class="wp-post-image" alt="" title="" draggable="false"></a>
+									</li>
+								<?php } ?>	
 								</ul>
 							</div>
 							<div id="carousel" class="flexslider thumbnail_product">
@@ -47,6 +57,16 @@
 								<?php if($tour->picture_3 != ''){ ?>		
 									<li>
 										<img width="150" height="100" src="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_3?>" class="wp-post-image" alt="" title="" draggable="false">
+									</li>
+								<?php } ?>		
+								<?php if($tour->picture_4 != ''){ ?>		
+									<li>
+										<img width="150" height="100" src="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_4?>" class="wp-post-image" alt="" title="" draggable="false">
+									</li>
+								<?php } ?>		
+								<?php if($tour->picture_5 != ''){ ?>		
+									<li>
+										<img width="150" height="100" src="<?php echo base_url()?>uploads/wisata/<?php echo $tour->slug?>/thumb/thumb_<?php echo $tour->picture_5?>" class="wp-post-image" alt="" title="" draggable="false">
 									</li>
 								<?php } ?>		
 								</ul>
@@ -75,17 +95,18 @@
 														<div id="comment-62" class="comment_container">
 															<img alt="" src="http://placehold.it/90x90" class="avatar avatar-60 photo" height="60" width="60">
 															<div id="jumlahsuka<?php echo $row->tour_review_id?>">suka</div>
-															<div class="comment-text">
+															<div class="comment-text" id="commentText<?php echo $row->tour_review_id?>">
 																<div class="star-rating" title="">
 																	<?php 															
 																	for($i=1;$i<=$row->rate;$i++){?>
 																	<i class="fa fa-star"></i>
 																<?php } ?>	
 																<?php if($row->rate < $i and $row->rate > $i-1){
+																	$i++;
 																?>
 																<i class="fa fa-star-half-o"></i>
 																<?php } 
-																	for($j=$i;$j<5;$j++){
+																	for($j=$i;$j<=5;$j++){
 																?>	
 																	<i class="fa fa-star-o"></i>
 																<?php } ?>
@@ -98,7 +119,16 @@
 																<div class="description">
 																	<p><?php echo $row->review?></p>
 																</div>
+																<?php
+																if($this->session->userdata('logged_in_user') == TRUE){
+																$like	= $this->db->query("select * from tour_review_like where tour_review_id = '$row->tour_review_id' and user_id = '$user_id' limit 1");
+																if($like->num_rows() > 0){
+																?>
+																<button class="button-sudah-terimakasih">Anda Menyukai Review Ini</button>
+																<?php } else { ?>
 																<button class="button-terimakasih" id="btn-like-<?php echo $row->tour_review_id?>" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Memproses" onclick="terimaKasih('<?php echo $row->tour_review_id?>')">Review Ini Sangat Membantu</button>
+																<?php	} 
+																} ?>
 															</div>
 														</div>
 													</li>
@@ -124,110 +154,54 @@
 								</div>
 							</div>
 							<div class="related tours">
-								<h2>Related Tours</h2>
+								<h2>Wisata Lainnya</h2>
 								<ul class="tours products wrapper-tours-slider">
+									<?php foreach($related->result() as $row) { ?>
 									<li class="item-tour col-md-4 col-sm-6 product">
 										<div class="item_border item-product">
 											<div class="post_images">
-												<a href="single-tour.html">
-													<span class="price">$93.00</span>
-													<img width="430" height="305" src="http://placehold.it/430x305" alt="Discover Brazil" title="Discover Brazil">
+												<a href="<?php echo base_url()?>tour/detail/<?php echo $row->slug?>">
+													<img width="430" height="305" src="<?php echo base_url()?>uploads/wisata/<?php echo $row->slug?>/thumb/thumb_<?php echo $row->picture_1?>" alt="" title="">
 												</a>
-												<div class="group-icon">
-													<a href="tours.html" data-toggle="tooltip" data-placement="top" title="" class="frist" data-original-title="Escorted Tour"><i class="flaticon-airplane-4"></i></a>
-													<a href="tours.html" data-toggle="tooltip" data-placement="top" title="" data-original-title="Rail Tour"><i class="flaticon-cart-1"></i></a>
-												</div>
 											</div>
 											<div class="wrapper_content">
 												<div class="post_title"><h4>
-													<a href="single-tour.html" rel="bookmark">Discover Brazil</a>
+													<a href="<?php echo base_url()?>tour/detail/<?php echo $row->slug?>" rel="bookmark"><?php echo ucwords($row->name) ?></a>
 												</h4></div>
-												<span class="post_date">5 DAYS 4 NIGHTS</span>
 												<div class="description">
-													<p>Aliquam lacus nisl, viverra convallis sit amet&nbsp;penatibus nunc&nbsp;luctus</p>
+													<p><?php echo ucwords(character_limiter($row->description, 100)) ?></p>
 												</div>
 											</div>
 											<div class="read_more">
 												<div class="item_rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
+													<?php
+												if($row->total_review == 0)
+												{
+													echo '<span style="font-size:10px">Belum ada review</span>' ;
+												}
+												else
+												{
+													$rate = $row->nilai_rating/$row->total_review;
+													for($i=1;$i<=$rate;$i++){?>
+														<i class="fa fa-star"></i>
+													<?php } ?>	
+													<?php if($rate < $i and $rate > $i-1){
+														$i++;
+													?>
+													<i class="fa fa-star-half-o"></i>
+													<?php } 
+														for($j=$i;$j<=5;$j++){
+													?>	
+														<i class="fa fa-star-o"></i>
+													<?php } 
+												}	
+													?>
 												</div>
-												<a rel="nofollow" href="single-tour.html" class="button product_type_tour_phys add_to_cart_button">Read more</a>
+												<a rel="nofollow" href="<?php echo base_url()?>tour/detail/<?php echo $row->slug?>" class="button product_type_tour_phys add_to_cart_button">Selanjutnya</a>
 											</div>
 										</div>
 									</li>
-									<li class="item-tour col-md-4 col-sm-6 product">
-										<div class="item_border item-product">
-											<div class="post_images">
-												<a href="single-tour.html">
-											<span class="price"><del>$87.00</del>
-												<ins>$82.00</ins>
-											</span>
-													<span class="onsale">Sale!</span>
-													<img width="430" height="305" src="http://placehold.it/430x305" alt="Discover Brazil" title="Discover Brazil">
-												</a>
-												<div class="group-icon">
-													<a href="tours.html" data-toggle="tooltip" data-placement="top" title="" class="frist" data-original-title="River Cruise"><i class="flaticon-transport-2"></i></a>
-													<a href="tours.html" data-toggle="tooltip" data-placement="top" title="" data-original-title="Wildlife"><i class="flaticon-island"></i></a>
-												</div>
-											</div>
-											<div class="wrapper_content">
-												<div class="post_title"><h4>
-													<a href="single-tour.html" rel="bookmark">Kiwiana Panorama</a>
-												</h4></div>
-												<span class="post_date">5 DAYS 4 NIGHTS</span>
-												<div class="description">
-													<p>Aliquam lacus nisl, viverra convallis sit amet&nbsp;penatibus nunc&nbsp;luctus</p>
-												</div>
-											</div>
-											<div class="read_more">
-												<div class="item_rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<a rel="nofollow" href="single-tour.html" class="button product_type_tour_phys add_to_cart_button">Read more</a>
-											</div>
-										</div>
-									</li>
-									<li class="item-tour col-md-4 col-sm-6 product">
-										<div class="item_border item-product">
-											<div class="post_images">
-												<a href="single-tour.html">
-													<span class="price">$64.00</span>
-													<img width="430" height="305" src="http://placehold.it/430x305" alt="Discover Brazil" title="Discover Brazil">
-												</a>
-												<div class="group-icon">
-													<a href="tours.html" data-toggle="tooltip" data-placement="top" title="" class="frist" data-original-title="Escorted Tour"><i class="flaticon-airplane-4"></i></a>
-													<a href="tours.html" data-toggle="tooltip" data-placement="top" title="" data-original-title="River Cruise"><i class="flaticon-transport-2"></i></a>
-												</div>
-											</div>
-											<div class="wrapper_content">
-												<div class="post_title"><h4>
-													<a href="single-tour.html" rel="bookmark">Anchorage to Quito</a>
-												</h4></div>
-												<span class="post_date">5 DAYS 4 NIGHTS</span>
-												<div class="description">
-													<p>Aliquam lacus nisl, viverra convallis sit amet&nbsp;penatibus nunc&nbsp;luctus</p>
-												</div>
-											</div>
-											<div class="read_more">
-												<div class="item_rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<a rel="nofollow" href="single-tour.html" class="button product_type_tour_phys add_to_cart_button">Read more</a>
-											</div>
-										</div>
-									</li>
+							<?php } ?>
 								</ul>
 							</div>
 						</div>
@@ -239,6 +213,7 @@
 									<div class="booking">
 										<div class="">
 											<div id="tourBookingForm">
+											<?php if($list_review->num_rows() > 0){ ?>
 												<p class="nilai-rating"><?php echo $tour_rating?></p>
 											
 												<p class="bintang-rating-big">
@@ -246,17 +221,20 @@
 														<i class="fa fa-star" aria-hidden="true"></i>
 													<?php } ?>	
 													<?php if($tour_rating < $i and $tour_rating > $i-1){
+														$i++;
 													?>
 													<i class="fa fa-star-half-o" aria-hidden="true"></i>
 													<?php } 
-														for($j=$i;$j<5;$j++){
+														for($j=$i;$j<=5;$j++){
 													?>	
 														<i class="fa fa-star-o"></i>
 													<?php } ?>
 												</p>
 											
-											
 												<a href="<?php echo base_url()?>review/add/<?php echo $tour->slug?>"><input class="btn-booking btn" value="Tulis Review" type="submit"></a>
+											<?php } else { ?>	
+												<h1><strong>Belum Ada Rating</strong></h1>
+											<?php } ?>	
 											</div>
 										</div>
 									</div>

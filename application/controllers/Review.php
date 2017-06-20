@@ -6,10 +6,10 @@ class Review extends MY_Controller {
 	{
 		parent::__construct();
 		$this->minify();
-		//if($this->session->userdata('logged_in_user') != TRUE)
-		//{
-		//	redirect(base_url());
-		//}
+		if($this->session->userdata('logged_in_user') != TRUE)
+		{
+			redirect(base_url().'login');
+		}
 	}
 	
 	function index()
@@ -96,8 +96,7 @@ class Review extends MY_Controller {
 
 	function add($tour_slug="")
 	{
-		//$user_id		= $this->session->userdata('user_id_user');
-		$user_id		= 1;
+		$user_id		= $this->session->userdata('user_id_user');
 	
 		$tour_slug		= $this->uri->segment(3);
 		$tour			= $this->db->query("select * from tourism_place where slug = '$tour_slug' limit 1");
@@ -127,8 +126,7 @@ class Review extends MY_Controller {
 	
 	function add_process()
 	{
-		//$user_id		= $this->session->userdata('user_id_user');
-		$user_id		= 1;
+		$user_id		= $this->session->userdata('user_id_user');
 		$tour_id		= $this->input->post('tour_id');
 		$slug			= $this->input->post('tour_slug');
 		
@@ -167,19 +165,22 @@ class Review extends MY_Controller {
 	
 	function terimakasih()
 	{
-		$tour_id = $this->input->post("tour_id");
-		//$user_id		= $this->session->userdata('user_id_user');
-		$user_id		= 1;
+		$tour_id 		= $this->input->post("tour_id");
+		$user_id		= $this->session->userdata('user_id_user');
 		
-		$data 	= array(
-						'tour_review_like_id'	=> $user_id.uniqid().date('Ymdhisu'),
-						'tour_review_id'		=> $tour_id,
-						'user_id'				=> $user_id,
-						'create_date'			=> date("Y-m-d H:i:s")
-					);
-					
-		$this->model_utama->insert_data('tour_review_like',$data);
-
+		$cek_like		= $this->db->query("select * from tour_review_like where tour_review_id = '$tour_id' and user_id = '$user_id' limit 1");
+		if($cek_like->num_rows() == 0 and $user_id != "")
+		{
+			$data 	= array(
+							'tour_review_like_id'	=> $user_id.uniqid().date('Ymdhisu'),
+							'tour_review_id'		=> $tour_id,
+							'user_id'				=> $user_id,
+							'create_date'			=> date("Y-m-d H:i:s")
+						);
+						
+			$this->model_utama->insert_data('tour_review_like',$data);
+		}
+			
 		$like_sekarang		= $this->db->query("select count(*) as total_like from tour_review_like where tour_review_id = '$tour_id'")->row()->total_like;
 		
 		echo $like_sekarang;

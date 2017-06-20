@@ -10,8 +10,9 @@ function terimaKasih(id)
 		},
 		success: function(r)
 		{
-			$("#btn-like-"+id).button('reset');
+			$("#btn-like-"+id).hide();
 			$("#jumlahsuka"+id).html(r);
+			$("#commentText"+id).append('<button class="button-sudah-terimakasih">Anda Menyukai Review Ini</button>');
 		}
 	});
 }
