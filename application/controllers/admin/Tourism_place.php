@@ -86,6 +86,8 @@
 				$file_dokumen1 		= 	$this->upload_files($upload_path,$allowed_types,'picture_1');
 				$file_dokumen2 		= 	$this->upload_files($upload_path,$allowed_types,'picture_2');
 				$file_dokumen3 		= 	$this->upload_files($upload_path,$allowed_types,'picture_3');
+				$file_dokumen4 		= 	$this->upload_files($upload_path,$allowed_types,'picture_4');
+				$file_dokumen5 		= 	$this->upload_files($upload_path,$allowed_types,'picture_5');
 				
 				$insert_data = array (
 								'name'	=> $this->input->post('name'), 
@@ -95,8 +97,9 @@
 								'slug'		=> $slug,
 								'picture_1'	=> $file_dokumen1,
 								'picture_2'	=> $file_dokumen2,
-								'picture_3'	=> $file_dokumen3
-
+								'picture_3'	=> $file_dokumen3,
+								'picture_4'	=> $file_dokumen4,
+								'picture_5'	=> $file_dokumen5
 								);
 
 				//print_r($insert_data);
@@ -151,68 +154,67 @@
 		
 
 		function update_process()
-
 		{
-
 			$user_id 				= $this->session->userdata('id_user');
-
 			$judul					= $this->model_utama->get_detail('1','setting_id','setting')->row()->website_name;
-
 			$data['title'] 			= 'Halaman Ubah product_category | '.$judul;
-
 			$data['heading'] 		= 'Update product_category';
-
 			$data['form_action'] 	= site_url('admin/product_category/update_process');
 
-	
-
-		
-
 			$this->form_validation->set_rules('name', 'name', 'required|min_length[3]');	
-
-		
-
-				
+			$this->form_validation->set_rules('description', 'description', 'required|min_length[3]');
 
 			if ($this->form_validation->run() == TRUE)
-
 			{
-
+				$tour_id			= $this->input->post('tour_id');
+				$slug				= url_title($this->security->xss_clean($this->input->post('name')), 'dash', TRUE);
 				
-
+				$tour				= $this->db->query("select * from tourism_place where tourism_place_id = '$tour_id' limit 1");
+			
+				$upload_path		= 	'./uploads/wisata/'.$slug;
+				$allowed_types		=	'gif|jpg|png|jpeg';
+				$file_dokumen1 		= 	$this->upload_files($upload_path,$allowed_types,'picture_1');
+				$file_dokumen2 		= 	$this->upload_files($upload_path,$allowed_types,'picture_2');
+				$file_dokumen3 		= 	$this->upload_files($upload_path,$allowed_types,'picture_3');
+				$file_dokumen4 		= 	$this->upload_files($upload_path,$allowed_types,'picture_4');
+				$file_dokumen5 		= 	$this->upload_files($upload_path,$allowed_types,'picture_5');
+				
 				$update_data = array (
-
-			
-
-								'category_product_name'	=> $this->security->xss_clean($this->input->post('name')), 
-
-								'slug'					=> url_title($this->security->xss_clean($this->input->post('name')), 'dash', TRUE),
-
-			
-
+								'name'	=> $this->input->post('name'), 
+								'description' => $this->input->post('description'),
+								'province_id' => $this->input->post('province_id'),
+								'city_id' => $this->input->post('city_id'),
+								'slug'		=> $slug,
 								);
 
-					
+				if( $file_dokumen1 != '' ){	
+					$update_data['picture_1']		= $file_dokumen1;
+					$this->delete_tour_picture($tour->row()->picture_1,$slug);
+				}
+				if( $file_dokumen2 != '' ){	
+					$update_data['picture_2']		= $file_dokumen2;
+					$this->delete_tour_picture($tour->row()->picture_2,$slug);
+				}
+				if( $file_dokumen3 != '' ){	
+					$update_data['picture_3']		= $file_dokumen3;
+					$this->delete_tour_picture($tour->row()->picture_3,$slug);
+				}
+				if( $file_dokumen4 != '' ){	
+					$update_data['picture_4']		= $file_dokumen4;
+					$this->delete_tour_picture($tour->row()->picture_4,$slug);
+				}
+				if( $file_dokumen5 != '' ){	
+					$update_data['picture_5']		= $file_dokumen5;
+					$this->delete_tour_picture($tour->row()->picture_5,$slug);
+				}
 
-				$this->model_utama->update_data($this->session->userdata('kd_update'),'category_product_id','category_product',$update_data);
-
-
+				$this->model_utama->update_data($tour_id,'tourism_place_id','tourism_place',$update_data);
 
 				$this->session->set_flashdata('success', 'Data berhasil diupdate!');
 
-				
+				$this->insert_log('ubah wisata dengan id : '.$tour_id);
 
-				$log['user_id']			= $user_id;
-
-				$log['activity']			= 'ubah data category_product dengan id : '.$this->session->userdata('kd_update').'  ';
-
-				$this->model_utama->insert_data('log_user', $log);
-
-	
-
-				// redirect('admin/category/update/'.$this->session->userdata('kd_update'));
-
-				redirect('admin/product_category/update/'.$this->session->userdata('kd_update'));
+				redirect('admin/tourism_place/update/'.$tour_id);
 
 			}
 
@@ -314,6 +316,18 @@
 			}
 			
 			echo $tampil;
+		}
+		
+		function delete_tour_picture($nama_gambar,$slug)
+		{
+			$Path 	= './uploads/wisata/'.$slug.'/'.$nama_gambar;
+			$Path2 	= './uploads/wisata/'.$slug.'/thumb/thumb_'.$nama_gambar;
+			if(file_exists($Path)){	
+				unlink($Path);
+			}
+			if(file_exists($Path)){			
+				unlink($Path2);
+			}
 		}
 		
 	}	

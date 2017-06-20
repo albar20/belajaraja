@@ -3,7 +3,8 @@
 				<div class="row">
 					<div class="site-main col-sm-9 alignright">
 						<ul class="tours products wrapper-tours-slider">
-							<?php foreach($tour_list->result() as $row) { ?>
+						<?php if($tour_list->num_rows() > 0){
+							foreach($tour_list->result() as $row) { ?>
 							<li class="item-tour col-md-4 col-sm-6 product">
 								<div class="item_border item-product">
 									<div class="post_images">
@@ -33,21 +34,26 @@
 												<i class="fa fa-star"></i>
 											<?php } ?>	
 											<?php if($rate < $i and $rate > $i-1){
+												$i++;
 											?>
 											<i class="fa fa-star-half-o"></i>
 											<?php } 
-												for($j=$i;$j<5;$j++){
+												for($j=$i;$j<=5;$j++){
 											?>	
 												<i class="fa fa-star-o"></i>
 											<?php } 
 										}	
 											?>
 										</div>
-										<a rel="nofollow" href="<?php echo base_url()?>tour/detail/<?php echo $row->slug?>" class="button product_type_tour_phys add_to_cart_button">Read more</a>
+										<a rel="nofollow" href="<?php echo base_url()?>tour/detail/<?php echo $row->slug?>" class="button product_type_tour_phys add_to_cart_button">Selanjutnya</a>
 									</div>
 								</div>
 							</li>
-							<?php } ?>
+							<?php } 
+							} else {
+								echo '<div class="alert alert-danger">Tempat wisata yang anda cari tidak ditemukan ! Anda dapat mengusulkan tempat wisata. <br><a class="btn btn-block btn-success" href="'.base_url().'rekomendasi/add">Usulkan Tempat Wisata Untuk Direview</a></div>';
+							}
+							?>
 						</ul>
 						<div class="navigation paging-navigation" role="navigation">
 							<?php echo $this->pagination->create_links(); ?>
@@ -62,8 +68,8 @@
 					<div class="widget-area align-left col-sm-3">
 						<div class="search_tour">
 							<div class="form-block block-after-indent">
-								<h3 class="form-block_title">Search Tour</h3>
-								<div class="form-block__description">Find your dream tour today!</div>
+								<h3 class="form-block_title">Cari Tempat Wisata</h3>
+								<div class="form-block__description"></div>
 								<?php echo form_open('tour'); ?>
 									<input type="hidden" name="tour_search" value="1">
 									<input type="text" placeholder="Search Tour" value="" name="name_tour">
@@ -87,7 +93,7 @@
 									<select name="tourtax[pa_month]" id="desa">
 										<option value="0">Desa</option>
 									</select>
-									<button type="submit" name="find">Find Tours</button>
+									<button type="submit" name="find">Cari</button>
 								</form>
 							</div>
 						</div>

@@ -93,7 +93,8 @@ class Tour extends MY_Controller {
 		$data['page']		= $this->front_folder.$this->themes_folder_name.'/tour/page_tour_detail';
 		
 		$tour				= $this->uri->segment(3);
-		$data['tour']		= $this->db->query("select * from tourism_place where slug = '$tour' limit 1");
+		$data['tour']		= $tour = $this->db->query("select * from tourism_place where slug = '$tour' limit 1");
+		$data['user_id'] 	= $this->session->userdata('user_id_user');
 		
 		if($data['tour']->num_rows() == 0)
 		{
@@ -101,12 +102,17 @@ class Tour extends MY_Controller {
 		}
 		
 		$data['tour']		= $tour = $data['tour']->row();
+		$data['related']	= $this->db->query("select *,
+												(select count(*) as total_review from tour_review where tourism_place_id = tourism_place.tourism_place_id) as total_review,
+												(select sum(rate) as nilai_rating from tour_review where tourism_place_id = tourism_place.tourism_place_id) as nilai_rating 
+												from tourism_place where city_id = '$tour->city_id' order by rand() limit 3");
 		
 		$all_review				= $this->db->query("select count(*) as total_review, sum(rate) as nilai_rating from tour_review where tourism_place_id = '$tour->tourism_place_id'")->row();
 		$list_review			= $this->db->query("select *,tour_review.create_date as tanggal_review from tour_review 
 													LEFT JOIN user
 													ON tour_review.user_id = user.user_id
-													WHERE tourism_place_id = '$tour->tourism_place_id'");
+													WHERE tourism_place_id = '$tour->tourism_place_id'
+													ORDER BY tour_review.create_date");
 		
 		$tour_rating			= ($all_review->nilai_rating == "" ? 0 : $all_review->nilai_rating)/($all_review->total_review == 0 ? 1 : $all_review->total_review);
 		

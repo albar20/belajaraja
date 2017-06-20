@@ -47,6 +47,7 @@
 												<p class="comment-form-author"><label for="author">Nama Wisata
 													<span class="required">*</span></label>
 													<input id="nama" name="nama" type="text" value="<?php echo (isset($rekomendasi) ? $rekomendasi->tour_name : "") ?>" size="30" required>
+													<input type="hidden" name="rekomendasi_id" value="<?php echo (isset($rekomendasi) ? $rekomendasi->user_recommendation_id : "") ?>">
 												</p>
 												
 												<p class="comment-form-author"><label for="author">Propinsi
@@ -63,7 +64,7 @@
 													<span class="required">*</span></label>
 													<select name="city_id" id="city" class="form-control" required>
 														<?php if(isset($rekomendasi) && $rekomendasi->city_id != 0){ ?>
-															<option value="<?php echo $rekomendasi->city_id ?>"><?php echo $rekomendasi->city_name ?> </option>
+															<option value="<?php echo $rekomendasi->city_id ?>"><?php echo $rekomendasi->name ?> </option>
 														<?php } else { ?>
 															<option value="">-- Pilih Kota --</option>
 														<?php } ?>
@@ -75,12 +76,8 @@
 														<textarea id="deskripsi" name="deskripsi" cols="45" rows="8"><?php echo (isset($rekomendasi) ? $rekomendasi->tour_description : "") ?></textarea>
 												</p>
 												
-												<p class="comment-form-author"><label for="author">Gambar Wisata
-													<input id="gambar1" name="gambar1" type="file" value="<?php echo (isset($my_review) ? $my_review->judul : "") ?>" size="30" required>
-													<input id="gambar2" name="gambar2" type="file" value="<?php echo (isset($my_review) ? $my_review->judul : "") ?>" size="30" required>
-													<input id="gambar3" name="gambar3" type="file" value="<?php echo (isset($my_review) ? $my_review->judul : "") ?>" size="30" required>
-												</p>
 										<hr>		
+												<h3 id="reply-title" class="comment-reply-title">Silakan masukkan review anda (optional).</h3>
 												<p class="comment-form-rating">
 													<label>Rating<span class="required">(optional)</span></label>
 												</p>
@@ -100,8 +97,32 @@
 														<span class="required">(optional)</span></label><textarea id="isi" name="isi" cols="45" rows="8"><?php echo (isset($rekomendasi) ? $rekomendasi->isi_review : "") ?></textarea>
 												</p>
 
+												<p class="comment-form-author"><label for="author">Masukkan Gambar (optional)
+													<input id="gambar1" name="gambar1" type="file" size="30" required>
+													<input id="gambar2" name="gambar2" type="file" size="30" required>
+													<input id="gambar3" name="gambar3" type="file" size="30" required>
+													<div class="row">
+														<?php if(isset($rekomendasi) && $rekomendasi->picture_1 != ""){ ?>
+														<div class="col-md-2">
+															<img src="<?php echo base_url()?>uploads/wisata_rekomendasi/<?php echo $rekomendasi->slug?>/thumb/thumb_<?php echo $rekomendasi->picture_1?>" />
+														</div>
+														<?php } ?>
+														<?php if(isset($rekomendasi) && $rekomendasi->picture_2 != ""){ ?>
+														<div class="col-md-2">
+															<img src="<?php echo base_url()?>uploads/wisata_rekomendasi/<?php echo $rekomendasi->slug?>/thumb/thumb_<?php echo $rekomendasi->picture_2?>" />
+														</div>
+														<?php } ?>
+														<?php if(isset($rekomendasi) && $rekomendasi->picture_3 != ""){ ?>
+														<div class="col-md-2">
+															<img src="<?php echo base_url()?>uploads/wisata_rekomendasi/<?php echo $rekomendasi->slug?>/thumb/thumb_<?php echo $rekomendasi->picture_3?>" />
+														</div>
+														<?php } ?>
+													</div>
+												</p>
+												
 												<p class="form-submit">
 													<input name="submit" type="submit" id="submit" class="submit" value="Submit">
+													<a href="<?php echo base_url()?>tour" class="btn btn-danger">Batal</a>
 												</p></form>
 										</div>
 									</div>

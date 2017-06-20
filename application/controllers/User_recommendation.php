@@ -6,10 +6,10 @@ class User_recommendation extends MY_Controller {
 	{
 		parent::__construct();
 		$this->minify();
-		//if($this->session->userdata('logged_in_user') != TRUE)
-		//{
-		//	redirect(base_url());
-		//}
+		if($this->session->userdata('logged_in_user') != TRUE)
+		{
+			redirect(base_url());
+		}
 	}
 
 	public function index()
@@ -65,13 +65,12 @@ class User_recommendation extends MY_Controller {
 	
 	function add_process()
 	{
-		//$user_id		= $this->session->userdata('user_id_user');
-		$user_id		= 1;
+		$user_id		= $this->session->userdata('user_id_user');
+	
 		$judul				= $this->setting->website_name;
 		$data['judul'] 		= ''.$judul;
 		$data['title'] 		= $data['judul'];
 		$data['page']		= $this->front_folder.$this->themes_folder_name.'/user_recommendation/page_add';
-		$data['form_action'] 	= site_url('admin/tourism_place/add_process');
 
 		$this->form_validation->set_rules('nama', 'nama', 'required|min_length[3]');
 		$this->form_validation->set_rules('province_id', 'Propinsi', 'required');	
@@ -123,14 +122,15 @@ class User_recommendation extends MY_Controller {
 	
 	public function edit()
 	{
-		//$user_id		= $this->session->userdata('user_id_user');
-		$user_id		= 1;
+		$user_id		= $this->session->userdata('user_id_user');
 	
 		$id_rekomendasi		= $this->uri->segment(3);
-		$rekomendasi		= $this->db->query("select * from user_recommendation 
-												LEFT JOIN city
-												ON user_recommendation.city_id = city.city_id
-												WHERE user_recommendation.user_recommendation_id= '$id_rekomendasi'
+		$rekomendasi		= $this->db->query("select * from user_recommendation as ur
+												LEFT JOIN location_provinces as lp
+												ON ur.province_id = lp.id
+												LEFT JOIN location_city as lc
+												ON ur.city_id = lc.id
+												WHERE ur.user_recommendation_id= '$id_rekomendasi'
 												limit 1");
 		
 		if($id_rekomendasi == "" || $rekomendasi->num_rows() == 0)
@@ -142,12 +142,85 @@ class User_recommendation extends MY_Controller {
 		$data['judul'] 		= ''.$judul;
 		$data['title'] 		= $data['judul'];
 		$data['page']		= $this->front_folder.$this->themes_folder_name.'/user_recommendation/page_add';
-		$data['form_action']= site_url('rekomendasi/add_process');
+		$data['form_action']= site_url('rekomendasi/edit_process');
 		$data['province']		= $this->db->query("select * from location_provinces");
-		$data['rekomendasi']	= $rekomendasi->row();
+		$data['rekomendasi']	= $rekomendasi = $rekomendasi->row();
+		
+		if($user_id != $rekomendasi->user_id)
+		{
+			redirect(base_url());
+		}
 		
 		$this->load->view($this->front_end_template, $data);
 		$this->log_visitor('lihat halaman home');
+	}
+	
+	function edit_process()
+	{
+		$user_id		= $this->session->userdata('user_id_user');
+	
+		$judul				= $this->setting->website_name;
+		$data['judul'] 		= ''.$judul;
+		$data['title'] 		= $data['judul'];
+		$data['page']		= $this->front_folder.$this->themes_folder_name.'/user_recommendation/page_add';
+
+		$this->form_validation->set_rules('nama', 'nama', 'required|min_length[3]');
+		$this->form_validation->set_rules('province_id', 'Propinsi', 'required');	
+		$this->form_validation->set_rules('city_id', 'Kota', 'required');			
+	
+		if ($this->form_validation->run() == TRUE)
+
+		{
+			$slug				= url_title($this->security->xss_clean($this->input->post('nama')), 'dash', TRUE);
+			$rekomendasi_id		= $this->input->post('rekomendasi_id');
+			$rekomendasi		= $this->db->query("select * from user_recommendation where user_recommendation_id = '$rekomendasi_id' limit 1")->row();
+		
+			$upload_path		= 	'./uploads/wisata_rekomendasi/'.$slug;
+			$allowed_types		=	'gif|jpg|png|jpeg';
+			$file_dokumen1 		= 	$this->upload_files($upload_path,$allowed_types,'gambar1');
+			$file_dokumen2 		= 	$this->upload_files($upload_path,$allowed_types,'gambar2');
+			$file_dokumen3 		= 	$this->upload_files($upload_path,$allowed_types,'gambar3');
+			
+			$update_data = array (
+							'tour_name'	=> $this->input->post('nama'), 
+							'tour_description' => $this->input->post('deskripsi'),
+							'user_id'	=> $user_id,
+							'province_id' => $this->input->post('province_id'),
+							'city_id' => $this->input->post('city_id'),
+							'slug'		=> $slug,
+							'rate' => $this->input->post('nilai_rating'),
+							'judul_review' => $this->input->post('judul'),
+							'isi_review' => $this->input->post('isi'),
+							'create_date' => date("Y-m-d H:i:s")
+							);
+			
+			if( $file_dokumen1 != '' ){	
+					$update_data['picture_1']		= $file_dokumen1;
+					$this->delete_tour_picture($rekomendasi->picture_1,$slug);
+				}
+				if( $file_dokumen2 != '' ){	
+					$update_data['picture_2']		= $file_dokumen2;
+					$this->delete_tour_picture($rekomendasi->picture_2,$slug);
+				}
+				if( $file_dokumen3 != '' ){	
+					$update_data['picture_3']		= $file_dokumen3;
+					$this->delete_tour_picture($rekomendasi->picture_3,$slug);
+				}
+			
+			//print_r($insert_data);
+
+			 $this->model_utama->update_data($rekomendasi_id,'user_recommendation_id','user_recommendation', $update_data);
+
+			$this->session->set_flashdata('success', 'Terima kasih, tempat wisata rekomendasi anda telah tersimpan dan akan diproses. Status rekomendasi anda dapat dilihat <a href="'.base_url().'rekomendasi">disini</a>');
+			// $this->insert_log('tambah data category_product');
+
+			redirect('rekomendasi/add', 'refresh');
+		}
+		else
+		{
+			$this->session->set_flashdata("danger",validation_errors());
+			redirect(base_url().'rekomendasi/add');
+		}
 	}
 	
 	public function page()
@@ -303,6 +376,18 @@ class User_recommendation extends MY_Controller {
 			$this->image_lib->resize();
 			$this->image_lib->clear();
 
+		}
+		
+		function delete_tour_picture($nama_gambar,$slug)
+		{
+			$Path 	= './uploads/wisata/'.$slug.'/'.$nama_gambar;
+			$Path2 	= './uploads/wisata/'.$slug.'/thumb/thumb_'.$nama_gambar;
+			if(file_exists($Path)){	
+				unlink($Path);
+			}
+			if(file_exists($Path)){			
+				unlink($Path2);
+			}
 		}
 	
 }
