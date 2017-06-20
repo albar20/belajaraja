@@ -22,29 +22,29 @@ class Tour extends MY_Controller {
 		====================================================*/
 		//echo $_POST['provinsi'];
 
-		if (isset($_POST['find']) && isset($_POST['provinsi']) && $_POST['provinsi']>0) {
-			$provinsi = $_POST['provinsi'];
-			$search =  $_POST['name_tour'];
-			$kota = $_POST['kota'];
+		if (isset($_GET['find']) && isset($_GET['provinsi']) && $_GET['provinsi']>0) {
+			$provinsi = $_GET['provinsi'];
+			$search =  $_GET['name_tour'];
+			$kota = $_GET['kota'];
 
-			if ($_POST['cari'] == 'provinsi') {
+			if ($_GET['cari'] == 'provinsi') {
 			 $sql    =   "SELECT 
                         *,
 						(select count(*) as total_review from tour_review where tourism_place_id = tourism_place.tourism_place_id) as total_review,
 						(select sum(rate) as nilai_rating from tour_review where tourism_place_id = tourism_place.tourism_place_id) as nilai_rating
-                    FROM tourism_place WHERE name LIKE '%$search%' AND province_id =".$_POST['provinsi']
+                    FROM tourism_place WHERE name LIKE '%$search%' AND province_id =".$_GET['provinsi']
                     ." ORDER BY create_date DESC". 
                     "  LIMIT ".$start.",".$limit;
-               $sql_numrows = "WHERE name LIKE '%$search%' AND province_id =".$_POST['provinsi'];
-              }elseif ($_POST['cari'] == 'kota') {
+               $sql_numrows = "WHERE name LIKE '%$search%' AND province_id =".$_GET['provinsi'];
+              }elseif ($_GET['cari'] == 'kota') {
 	         	$sql    =   "SELECT *, (select count(*) as total_review from tour_review where tourism_place_id = tourism_place.tourism_place_id) as 
 	         	total_review, (select sum(rate) as nilai_rating from tour_review where tourism_place_id = tourism_place.tourism_place_id) as nilai_rating FROM
 	         	 tourism_place WHERE name LIKE '%$search%' AND province_id =$provinsi AND city_id = $kota ORDER BY create_date DESC LIMIT $start,$limit ";
 	         	$sql_numrows = "WHERE name LIKE '%$search%' AND province_id =$provinsi AND city_id = $kota";
               }
 
-		} elseif (isset($_POST['find'])) {
-			$search =  $_POST['name_tour'];
+		} elseif (isset($_GET['find'])) {
+			$search =  $_GET['name_tour'];
 
 		$sql    =   "SELECT 
                         *,
@@ -55,6 +55,7 @@ class Tour extends MY_Controller {
                     "  LIMIT ".$start.",".$limit;
             $sql_numrows = "WHERE name LIKE '%$search%'";
 		}else{
+
 			$sql = $this->tour_sql_helper(	$start,$limit );
 			$sql_numrows = "";			
 		}
@@ -144,8 +145,37 @@ class Tour extends MY_Controller {
 			1.	Get Tour
 		====================================================*/
 		
-		$sql = $this->tour_sql_helper(	$start, 
-												$limit );
+		$sql = "SELECT 
+                        *,
+						(select count(*) as total_review from tour_review where tourism_place_id = tourism_place.tourism_place_id) as total_review,
+						(select sum(rate) as nilai_rating from tour_review where tourism_place_id = tourism_place.tourism_place_id) as nilai_rating
+                    FROM tourism_place";
+         $order = " ORDER BY create_date DESC"."  LIMIT ".$start.",".$limit;
+
+
+		if (isset($_GET['find']) && isset($_GET['provinsi']) && $_GET['provinsi']>0) {
+			$provinsi = $_GET['provinsi'];
+			$search =  $_GET['name_tour'];
+			$kota = $_GET['kota'];
+
+			if ($_GET['cari'] == 'provinsi') {
+			 $sql    = $sql." WHERE name LIKE '%$search%' AND province_id =".$_GET['provinsi']." ".$order;
+             $sql_numrows = "WHERE name LIKE '%$search%' AND province_id =".$_GET['provinsi'];
+              }elseif ($_GET['cari'] == 'kota') {
+	         	$sql    =  $sql." WHERE name LIKE '%$search%' AND province_id =$provinsi AND city_id = $kota ".$order;
+	         	$sql_numrows = "WHERE name LIKE '%$search%' AND province_id =$provinsi AND city_id = $kota";
+              }
+
+		} elseif (isset($_GET['find'])) {
+			$search =  $_GET['name_tour'];
+
+		$sql    =   $sql." WHERE name LIKE '%$search%' ".$order;
+        $sql_numrows = "WHERE name LIKE '%$search%'";
+		}else{
+			
+			$sql = $this->tour_sql_helper(	$start,$limit );
+			$sql_numrows = "";			
+		}
 
 		$data['tour_list']	= $this->db->query($sql);										
 												
@@ -203,7 +233,8 @@ class Tour extends MY_Controller {
 		$config['total_rows'] 		= $total_row;
 		$config['per_page'] 		= $limit; 
 		$config['uri_segment'] 		= $uri_segment;
-
+		$config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
+		if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
 		$this->pagination->initialize($config); 
 
 	}

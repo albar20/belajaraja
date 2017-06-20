@@ -47,7 +47,8 @@
 							<span class="shows_from login"><i class="fa fa-user"></i>
 
 <?php if ($this->session->userdata('username_user') == TRUE): ?>
-									Selamat datang <?php echo $this->session->userdata('username_user'); ?>
+								<a href="<?php echo base_url() ?>review">	Selamat datang <?php echo $this->session->userdata('username_user'); ?>
+								</a>
 								<?php else: ?>
 							<a href="<?php echo base_url() ?>login"> Login   </a>			
 								<?php endif ?>

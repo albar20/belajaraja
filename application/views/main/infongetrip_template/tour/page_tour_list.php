@@ -64,7 +64,8 @@
 							<div class="form-block block-after-indent">
 								<h3 class="form-block_title">Search Tour</h3>
 								<div class="form-block__description">Find your dream tour today!</div>
-								<?php echo form_open('tour'); ?>
+								
+								<form action="<?php echo base_url() ?>tour" method="GET">
 									<input type="hidden" name="tour_search" value="1">
 									<input type="text" placeholder="Search Tour" value="" name="name_tour">
 
