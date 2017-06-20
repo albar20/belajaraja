@@ -16,6 +16,7 @@
 	<?php $this->carabiner->css("front_page/template/infongetrip/css/travel-setting.css"); ?>
 	<?php $this->carabiner->css("front_page/template/infongetrip/css/custom.css") ?>
 	<?php $this->carabiner->css("front_page/css/jquery.rateyo.min.css"); ?>
+	<?php $this->carabiner->css("general/datepicker/css/bootstrap-datepicker.min.css") ?>
 	<?php echo $this->carabiner->display('css'); ?>
 	<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 </head>
@@ -55,6 +56,7 @@
 <?php $this->carabiner->js("front_page/js/rating.js","","false"); ?>
 <?php $this->carabiner->js("front_page/template/infongetrip/js/review.js","","false"); ?>
 <?php $this->carabiner->js("front_page/template/infongetrip/js/update_profile.js","","false"); ?>
+<?php $this->carabiner->js("general/datepicker/js/bootstrap-datepicker.min.js","","false"); ?>
 <?php echo $this->carabiner->display('js'); ?>
 
 

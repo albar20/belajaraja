@@ -6896,7 +6896,7 @@ input[type=radio]:checked:before {
 	top:        0;
 	left:       0;
 	padding:    3px;
-	width:      32px;
+	width:      50px;
 	height:     auto;
 	background: #ebe9eb;
 	border:     1px solid #e4e1e3;
@@ -6905,7 +6905,7 @@ input[type=radio]:checked:before {
 }
 
 .travel_tour #reviews #comments ol.commentlist li .comment-text {
-	margin:        0 0 0 50px;
+	margin:        0 0 0 70px;
 	border:        1px solid #e4e1e3;
 	border-radius: 4px;
 	padding:       1em 1em 0
@@ -8898,4 +8898,9 @@ input[type=radio]:checked:before {
 	text-align:center;
 	font-size: 2em;
 	color: #ffb300;
+}
+
+.jumlah-suka{
+	position: relative;
+	top:60px;
 }

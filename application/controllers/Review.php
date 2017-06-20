@@ -106,6 +106,7 @@ class Review extends MY_Controller {
 			$data['judul'] 		= ''.$judul;
 			$data['title'] 		= $data['judul'];
 			$data['tour']		= $tour = $tour->row();
+			$data['slug']		= $tour_slug;
 			
 			$cek_review_sebelum		= $this->db->query("select * from tour_review where user_id = '$user_id' and tourism_place_id = '$tour->tourism_place_id' limit 1");
 			$all_review				= $this->db->query("select count(*) as total_review, sum(rate) as nilai_rating from tour_review where tourism_place_id = '$tour->tourism_place_id'")->row();
@@ -134,15 +135,36 @@ class Review extends MY_Controller {
 		$this->form_validation->set_rules('isi','isi','required|min_length[10]');
 		$this->form_validation->set_rules('nilai_rating','nilai_rating','required');
 		if ($this->form_validation->run() == TRUE) {
+		
+			$upload_path		= 	'./uploads/review/'.$slug;
+			$allowed_types		=	'gif|jpg|png|jpeg';
+			$file_dokumen1 		= 	$this->upload_files($upload_path,$allowed_types,'gambar1');
+			$file_dokumen2 		= 	$this->upload_files($upload_path,$allowed_types,'gambar2');
+			$file_dokumen3 		= 	$this->upload_files($upload_path,$allowed_types,'gambar3');
+		
 			$data['tour_review_id']		= $user_id.uniqid().date("Ymdhis");
-			$data['judul']				= $this->input->post('judul');
-			$data['review']				= $this->input->post('isi');
+			$data['judul']				= $this->security->xss_clean($this->input->post('judul'));
+			$data['review']				= $this->security->xss_clean($this->input->post('isi'));
 			$data['rate']				= $this->input->post('nilai_rating');
 			$data['user_id']			= $user_id;
 			$data['tourism_place_id']	= $tour_id;
+			$data['tanggal_berkunjung']	= date("Y-m-d", strtotime($this->input->post('tanggal_berkunjung')));
 			$data['create_date']		= date("Y-m-d");
 			
 			$cek_review_sebelum		= $this->db->query("select * from tour_review where user_id = '$user_id' and tourism_place_id = '$tour_id' limit 1");
+			
+			if( $file_dokumen1 != '' ){	
+				$data['picture_1']		= $file_dokumen1;
+				$this->delete_tour_picture($cek_review_sebelum->row()->picture_1,$slug);
+			}
+			if( $file_dokumen2 != '' ){	
+				$data['picture_2']		= $file_dokumen2;
+				$this->delete_tour_picture($cek_review_sebelum->row()->picture_2,$slug);
+			}
+			if( $file_dokumen3 != '' ){	
+				$data['picture_3']		= $file_dokumen3;
+				$this->delete_tour_picture($cek_review_sebelum->row()->picture_3,$slug);
+			}
 			
 			if($cek_review_sebelum->num_rows() > 0)
 			{
@@ -185,4 +207,76 @@ class Review extends MY_Controller {
 		
 		echo $like_sekarang;
 	}
+	
+	function upload_files($upload_path,$allowed_types,$file_name,$remove_space=''){
+	
+			//if($this->session->userdata('login_pelaksana') == true ){
+
+				$config['upload_path'] 		= $upload_path;
+				$config['allowed_types'] 	= $allowed_types;
+				if( $remove_space != '' ){
+					$config['remove_spaces'] 	= $remove_space;	
+				}
+				$this->load->library('upload', $config);
+				
+				if( !is_dir($upload_path) ){
+					mkdir($upload_path, 0777, true);
+					mkdir($upload_path.'/thumb', 0777, true);
+				}
+				
+				if ( !$this->upload->do_upload($file_name) ){
+					$file_dokumen	= '';
+				}else{
+					$dokumen		= $this->upload->data();
+					$file_dokumen	= $dokumen['file_name'];
+				}
+
+				if( 	$file_dokumen != ''
+					&&	( stripos($file_dokumen,'jpg') > 0	||	stripos($file_dokumen,'png') > 0 )
+				){
+					$config_array = array(
+											'upload_path'	=>	$upload_path,
+											'image_name'	=>	$file_dokumen	
+										);
+					$this->image_manipulation($config_array);
+				}
+				return $file_dokumen;
+			//}
+			//else
+			//{
+			//	redirect('login');
+			//}
+		}
+		
+		function image_manipulation($config_array){
+
+
+			$this->load->library('image_lib');
+	 
+
+			$config['image_library']    = 'gd2';
+			$config['source_image']     = $config_array['upload_path'].'/'.$config_array['image_name'];
+			$config['new_image']        = $config_array['upload_path'].'/thumb/thumb_'.$config_array['image_name'];
+			$config['create_thumb'] 	= TRUE;
+			$config['maintain_ratio']   = TRUE;
+			$config['width']            = 360;
+			$config['quality'] 			= 60;
+			$config['thumb_marker'] 	= '';
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			$this->image_lib->clear();
+
+		}
+		
+		function delete_tour_picture($nama_gambar,$slug)
+		{
+			$Path 	= './uploads/review/'.$slug.'/'.$nama_gambar;
+			$Path2 	= './uploads/review/'.$slug.'/thumb/thumb_'.$nama_gambar;
+			if(file_exists($Path)){	
+				unlink($Path);
+			}
+			if(file_exists($Path)){			
+				unlink($Path2);
+			}
+		}
 }	

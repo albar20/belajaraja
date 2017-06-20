@@ -83,7 +83,7 @@
 									<div id="review_form">
 										<div id="respond" class="comment-respond">
 											<h3 id="reply-title" class="comment-reply-title">Terima kasih, Review dari anda akan sangat membantu traveller lainnya.</h3>
-											<form action="<?php echo base_url()?>review/add_process" method="post" id="commentform" class="comment-form" novalidate="">
+											<form action="<?php echo base_url()?>review/add_process" method="post" id="commentform" class="comment-form" novalidate="" enctype='multipart/form-data'>
 												<p class="comment-form-rating">
 													<label>Rating</label>
 												</p>
@@ -100,8 +100,38 @@
 
 												<p class="comment-form-comment">
 													<label for="comment">Isi Review
-														<span class="required">*</span></label><textarea id="isi" name="isi" cols="45" rows="8" required><?php echo (isset($my_review) ? $my_review->review : "") ?></textarea>
+														<span class="required">*</span></label><textarea id="isiSummernote" name="isi" cols="45" rows="8" required><?php echo (isset($my_review) ? $my_review->review : "") ?></textarea>
 												</p>
+												
+												<p class="comment-form-author" id="bs-datepicker-component">
+													<label for="comment">Tanggal Berkunjung
+														<span class="required">(Optional)</span></label>
+													<input required type="text" name="tanggal_berkunjung" class="form-control" value="<?php echo (isset($my_review) ? date("m/d/Y", strtotime($my_review->tanggal_berkunjung)) : "") ?>">
+												</p>
+
+												<p class="comment-form-author"><label for="author">Masukkan Gambar (optional)
+													<input id="gambar1" name="gambar1" type="file" size="30" required>
+													<input id="gambar2" name="gambar2" type="file" size="30" required>
+													<input id="gambar3" name="gambar3" type="file" size="30" required>
+													<div class="row">
+														<?php if(isset($my_review) && $my_review->picture_1 != ""){ ?>
+														<div class="col-md-2">
+															<img src="<?php echo base_url()?>uploads/review/<?php echo $slug?>/thumb/thumb_<?php echo $my_review->picture_1?>" />
+														</div>
+														<?php } ?>
+														<?php if(isset($my_review) && $my_review->picture_2 != ""){ ?>
+														<div class="col-md-2">
+															<img src="<?php echo base_url()?>uploads/review/<?php echo $slug?>/thumb/thumb_<?php echo $my_review->picture_2?>" />
+														</div>
+														<?php } ?>
+														<?php if(isset($my_review) && $my_review->picture_3 != ""){ ?>
+														<div class="col-md-2">
+															<img src="<?php echo base_url()?>uploads/review/<?php echo $slug?>/thumb/thumb_<?php echo $my_review->picture_3?>" />
+														</div>
+														<?php } ?>
+													</div>
+												</p>
+												
 												<p class="form-submit">
 													<input name="submit" type="submit" id="submit" class="submit" value="Submit">
 													<a href="<?php echo base_url()?>tour/detail/<?php echo $tour->slug?>" class="btn btn-danger">Batal</a>

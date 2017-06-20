@@ -91,11 +91,12 @@
 											<?php if($list_review->num_rows() > 0){ ?>
 												<ol class="commentlist">
 												<?php foreach($list_review->result() as $row){ ?>
-													<li itemscope="" itemtype="http://schema.org/Review" class="comment byuser comment-author-physcode bypostauthor even thread-even depth-1" id="li-comment-62">
+													<li itemscope="" itemtype="" class="comment byuser comment-author-physcode bypostauthor even thread-even depth-1" id="li-comment-62">
 														<div id="comment-62" class="comment_container">
-															<img alt="" src="http://placehold.it/90x90" class="avatar avatar-60 photo" height="60" width="60">
-															<div id="jumlahsuka<?php echo $row->tour_review_id?>">suka</div>
+															<img alt="" src="<?php echo base_url()?>uploads/infongetrip/user/<?php echo $row->picture?>" class="avatar avatar-60 photo" height="60" width="60">
+															<div class="jumlah-suka"><i class="fa fa-thumbs-up orange" aria-hidden="true"> </i><span id="jumlahsuka<?php echo $row->tour_review_id?>"><?php echo $row->total_like?></span>&nbsp;<i class="fa fa-pencil-square-o orange" aria-hidden="true"></i><?php echo $row->total_review?></div>
 															<div class="comment-text" id="commentText<?php echo $row->tour_review_id?>">
+																<p style="color:royalblue"><?php echo $row->user_name?></p>
 																<div class="star-rating" title="">
 																	<?php 															
 																	for($i=1;$i<=$row->rate;$i++){?>

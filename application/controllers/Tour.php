@@ -109,7 +109,10 @@ class Tour extends MY_Controller {
 												from tourism_place where city_id = '$tour->city_id' order by rand() limit 3");
 		
 		$all_review				= $this->db->query("select count(*) as total_review, sum(rate) as nilai_rating from tour_review where tourism_place_id = '$tour->tourism_place_id'")->row();
-		$list_review			= $this->db->query("select *,tour_review.create_date as tanggal_review from tour_review 
+		$list_review			= $this->db->query("select *,tour_review.create_date as tanggal_review, 
+													(select count(*) from tour_review_like where tour_review_id = tour_review.tour_review_id) as total_like,
+													(select count(*) from tour_review where user_id = user.user_id) as total_review													
+													from tour_review
 													LEFT JOIN user
 													ON tour_review.user_id = user.user_id
 													WHERE tourism_place_id = '$tour->tourism_place_id'
