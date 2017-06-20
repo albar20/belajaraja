@@ -1,3 +1,8 @@
+21/06/2017
+ALTER TABLE `user` CHANGE `location` `city_id` INT(10) NOT NULL;
+
+
+
 ALTER TABLE `user` ADD `email_code` VARCHAR(250) NOT NULL AFTER `picture`;
 
 10/06/2017

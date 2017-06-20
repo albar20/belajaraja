@@ -6,10 +6,10 @@ class Review extends MY_Controller {
 	{
 		parent::__construct();
 		$this->minify();
-		if($this->session->userdata('logged_in_user') != TRUE)
-		{
-			redirect(base_url().'login');
-		}
+		//if($this->session->userdata('logged_in_user') != TRUE)
+		//{
+		//	redirect(base_url());
+		//}
 	}
 	
 	function index()
@@ -43,9 +43,14 @@ class Review extends MY_Controller {
 		$data['total_rows'] = $this->db->query($sql_all)->num_rows();
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$sql 			= "SELECT * FROM tour_review WHERE user_id = $user_id LIMIT $page,".$config['per_page'];
-		$data['user']       = $this->db->get_where('user',array('user_id' => $this->session->userdata('user_id_user')))->row();		
+		$sql 				= "SELECT tour_review.*,tourism_place.picture_1,tourism_place.slug FROM tour_review LEFT JOIN tourism_place ON tour_review.tourism_place_id = tourism_place.tourism_place_id WHERE tour_review.user_id = $user_id LIMIT $page,".$config['per_page'];
+		$sql_total 				= "SELECT tour_review.*,tourism_place.picture_1,tourism_place.slug FROM tour_review LEFT JOIN tourism_place ON tour_review.tourism_place_id = tourism_place.tourism_place_id WHERE tour_review.user_id = $user_id ";
+		$sql_user 			= "SELECT user.*,location_provinces.name FROM
+								user LEFT JOIN location_provinces ON user.city_id = location_provinces.id WHERE user.user_id = $user_id
+								";
+		$data['user']       = $this->db->query($sql_user)->row();		
 		$data['review']     = $this->db->query($sql)->result();
+		$data['total_review']     = $this->db->query($sql_total)->num_rows();
 		$data['page_menu']		= 'main/infongetrip_template/review_page';
 
 		$this->load->view($this->front_end_template, $data);
@@ -84,9 +89,14 @@ class Review extends MY_Controller {
 
 		$this->pagination->initialize($config);
 		$page 				= ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$sql 				= "SELECT * FROM tour_review WHERE user_id = $user_id LIMIT $page,".$config['per_page'];		
+		$sql 				= "SELECT tour_review.*,tourism_place.picture_1,tourism_place.slug FROM tour_review LEFT JOIN tourism_place ON tour_review.tourism_place_id = tourism_place.tourism_place_id WHERE tour_review.user_id = $user_id LIMIT $page,".$config['per_page'];		
 		$data['review']     = $this->db->query($sql)->result();
-		$data['user']       = $this->db->get_where('user',array('user_id' => $this->session->userdata('user_id_user')))->row();
+		$sql_total 				= "SELECT tour_review.*,tourism_place.picture_1,tourism_place.slug FROM tour_review LEFT JOIN tourism_place ON tour_review.tourism_place_id = tourism_place.tourism_place_id WHERE tour_review.user_id = $user_id ";
+		$data['total_review']     = $this->db->query($sql_total)->num_rows();
+		$sql_user 			= "SELECT user.*,location_provinces.name FROM
+								user LEFT JOIN location_provinces ON user.city_id = location_provinces.id WHERE user.user_id = $user_id
+								";
+		$data['user']       = $this->db->query($sql_user)->row();
 		$data['page_menu']		= 'main/infongetrip_template/review_page';
 
 		$this->load->view($this->front_end_template, $data);
@@ -96,7 +106,8 @@ class Review extends MY_Controller {
 
 	function add($tour_slug="")
 	{
-		$user_id		= $this->session->userdata('user_id_user');
+		//$user_id		= $this->session->userdata('user_id_user');
+		$user_id		= 1;
 	
 		$tour_slug		= $this->uri->segment(3);
 		$tour			= $this->db->query("select * from tourism_place where slug = '$tour_slug' limit 1");
@@ -126,7 +137,8 @@ class Review extends MY_Controller {
 	
 	function add_process()
 	{
-		$user_id		= $this->session->userdata('user_id_user');
+		//$user_id		= $this->session->userdata('user_id_user');
+		$user_id		= 1;
 		$tour_id		= $this->input->post('tour_id');
 		$slug			= $this->input->post('tour_slug');
 		
@@ -165,22 +177,19 @@ class Review extends MY_Controller {
 	
 	function terimakasih()
 	{
-		$tour_id 		= $this->input->post("tour_id");
-		$user_id		= $this->session->userdata('user_id_user');
+		$tour_id = $this->input->post("tour_id");
+		//$user_id		= $this->session->userdata('user_id_user');
+		$user_id		= 1;
 		
-		$cek_like		= $this->db->query("select * from tour_review_like where tour_review_id = '$tour_id' and user_id = '$user_id' limit 1");
-		if($cek_like->num_rows() == 0 and $user_id != "")
-		{
-			$data 	= array(
-							'tour_review_like_id'	=> $user_id.uniqid().date('Ymdhisu'),
-							'tour_review_id'		=> $tour_id,
-							'user_id'				=> $user_id,
-							'create_date'			=> date("Y-m-d H:i:s")
-						);
-						
-			$this->model_utama->insert_data('tour_review_like',$data);
-		}
-			
+		$data 	= array(
+						'tour_review_like_id'	=> $user_id.uniqid().date('Ymdhisu'),
+						'tour_review_id'		=> $tour_id,
+						'user_id'				=> $user_id,
+						'create_date'			=> date("Y-m-d H:i:s")
+					);
+					
+		$this->model_utama->insert_data('tour_review_like',$data);
+
 		$like_sekarang		= $this->db->query("select count(*) as total_like from tour_review_like where tour_review_id = '$tour_id'")->row()->total_like;
 		
 		echo $like_sekarang;

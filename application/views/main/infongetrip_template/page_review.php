@@ -4,9 +4,9 @@
 	<div class="review">
 
 	<div class="col-md-3">
-		<img class="img-rounded" src="<?php echo base_url()?>uploads/infongetrip/user/WIN_20160113_15_57_26_Pro.jpg" alt="" title="">
-		<h2>Cahyo Prabowo</h2>
-		<p class="place-rev"> <i class="fa fa-map-marker marker" aria-hidden="true"></i> Lampung selatan, Join date:  <i>2 Jan 2017</i>  </p>
+		<img class="img-rounded" src="<?php echo base_url()?>uploads/infongetrip/user/<?php echo $user->picture ?>" alt="" title="">
+		<h2> <?php echo ucwords($user->user_name)  ?>  </h2>
+		<p class="place-rev"> <i class="fa fa-map-marker marker" aria-hidden="true"></i> <?php echo $user->name; ?>, Join date:  <i><?php echo date('d F Y',strtotime($user->create_date)) ?></i>  </p>
 <ul class="list-group menu-profile">
 <a  href="<?php echo base_url() ?>review/?review">  <li class="list-group-item sub-menu"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
  <?php echo ucwords('Review') ?></li> </a>	

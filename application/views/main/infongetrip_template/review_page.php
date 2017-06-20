@@ -1,7 +1,7 @@
       <h2><i class="fa fa-quote-right" aria-hidden="true"></i>
  Client Constribution</h2>
         <ul class="breadcrumb">
-    <li class="active">Reviews (5)</li>
+    <li class="active">Reviews (<?php echo $total_review; ?>)</li>
     <li><a href="#">Beach</a></li>
     <li><a href="#">Island</a></li>
     <li ><a href="#"> Place </a></li>        
@@ -21,7 +21,7 @@
 
         <?php foreach ($review as $rev) {?>
         <tr>
-          <td>  <img class="image_review" src="<?php echo base_url() ?>uploads/wisata/asdasdsad/thumb/thumb_11DreadOut_branding_image.jpg"></td>
+          <td>  <img class="image_review" src="<?php echo base_url() ?>uploads/wisata/<?php echo $rev->slug ?>/<?php echo $rev->picture_1; ?>"></td>
           <td class="desc">
               <a href=""><i class="fa fa-map-marker" aria-hidden="true"></i>
             

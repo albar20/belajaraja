@@ -11,6 +11,7 @@ function show_user(){
 
 	$(document).ready(function() {
 
+
 $("#provinsi").hide();
 $("#desa").hide();
 $("#kota").hide();
