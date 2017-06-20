@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+	$('#bs-datepicker-component').datepicker();
+});	
+
 function terimaKasih(id)
 {
 	$.ajax({
