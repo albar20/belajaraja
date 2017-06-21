@@ -11,6 +11,16 @@ function show_user(){
 
 	$(document).ready(function() {
 
+// $(".navigation-menu").hide();
+  $(window).scroll(function() {
+    if ($(document).scrollTop() > 50) {
+      // $("p").addClass("test");
+      $(".navigation-menu").hide();
+    } else {
+    	 $(".navigation-menu").show();
+      // $("p").removeClass("test");
+    }
+  });
 
 $("#provinsi").hide();
 $("#desa").hide();

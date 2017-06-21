@@ -251,6 +251,10 @@ address {
 	margin: 0 0 1.5em;
 }
 
+#masthead{
+	position: fixed!important;
+}
+
 pre {
 	background:    #eee;
 	font-family:   "Courier 10 Pitch", Courier, monospace;

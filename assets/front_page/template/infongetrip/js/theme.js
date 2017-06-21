@@ -197,34 +197,34 @@ var custom_js = {
 		}
 	},
 
-	stickyHeaderInit: function () {
-		//Add class for masthead
-		var $header = jQuery('.sticky_header'),
-			menuH = $header.outerHeight(),
-			$top_header = jQuery('.header_top_bar').outerHeight() + 2,
-			latestScroll = 0;
-		if (jQuery(window).scrollTop() > $top_header) {
-			$header.removeClass('affix-top').addClass('affix');
-		}
-		jQuery(window).scroll(function () {
-			var current = jQuery(this).scrollTop();
-			if (current > $top_header) {
-				$header.removeClass('affix-top').addClass('affix');
-			} else {
-				$header.removeClass('affix').addClass('affix-top');
-			}
-			if (current > latestScroll && current > menuH) {
-				if (!$header.hasClass('menu-hidden')) {
-					$header.addClass('menu-hidden');
-				}
-			} else {
-				if ($header.hasClass('menu-hidden')) {
-					$header.removeClass('menu-hidden');
-				}
-			}
-			latestScroll = current;
-		});
-	},
+	// stickyHeaderInit: function () {
+	// 	//Add class for masthead
+	// 	var $header = jQuery('.sticky_header'),
+	// 		menuH = $header.outerHeight(),
+	// 		$top_header = jQuery('.header_top_bar').outerHeight() + 2,
+	// 		latestScroll = 0;
+	// 	if (jQuery(window).scrollTop() > $top_header) {
+	// 		$header.removeClass('affix-top').addClass('affix');
+	// 	}
+	// 	jQuery(window).scroll(function () {
+	// 		var current = jQuery(this).scrollTop();
+	// 		if (current > $top_header) {
+	// 			$header.removeClass('affix-top').addClass('affix');
+	// 		} else {
+	// 			$header.removeClass('affix').addClass('affix-top');
+	// 		}
+	// 		if (current > latestScroll && current > menuH) {
+	// 			if (!$header.hasClass('menu-hidden')) {
+	// 				$header.addClass('menu-hidden');
+	// 			}
+	// 		} else {
+	// 			if ($header.hasClass('menu-hidden')) {
+	// 				$header.removeClass('menu-hidden');
+	// 			}
+	// 		}
+	// 		latestScroll = current;
+	// 	});
+	// },
 }
 
 jQuery(window).load(function () {
