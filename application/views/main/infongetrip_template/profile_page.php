@@ -1,5 +1,5 @@
       <div class="line-header">
-      <h1><?php echo ucwords($user->user_name);  ?></h1> </div> <i class="fa fa-map-marker marker" aria-hidden="true"> <?php echo $user->location; ?> </i> 
+      <h1><?php echo ucwords($user->user_name);  ?></h1> </div> <i class="fa fa-map-marker marker" aria-hidden="true"> <?php echo $user->name; ?> </i> 
       <h4 class="job"><i class="fa fa-briefcase" aria-hidden="true"></i> &nbsp; <i><?php echo ucwords($user->job); ?></i> </h4>
       <div class="cleaner"></div>
 

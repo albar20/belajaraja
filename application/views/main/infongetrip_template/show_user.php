@@ -21,7 +21,7 @@
       	      	<tr>
       		<td> <b>Birthday</b> </td>
       		<td>:</td>
-      		<td><?php echo $user->birthday; ?></td>
+      		<td><?php echo date('d M Y',strtotime($user->birthday)) ; ?></td>
       	</tr>
       	 <tr>
       		<td> <b>Gender</b> </td>

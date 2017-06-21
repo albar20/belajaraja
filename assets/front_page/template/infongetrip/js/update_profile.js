@@ -11,6 +11,8 @@ function show_user(){
 
 	$(document).ready(function() {
 
+ $( "#birthday" ).datepicker();
+
 // $(".navigation-menu").hide();
   $(window).scroll(function() {
     if ($(document).scrollTop() > 50) {
