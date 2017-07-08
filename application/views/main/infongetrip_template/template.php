@@ -56,6 +56,7 @@
 <?php $this->carabiner->js("front_page/js/rating.js","","false"); ?>
 <?php $this->carabiner->js("front_page/template/infongetrip/js/review.js","","false"); ?>
 <?php $this->carabiner->js("front_page/template/infongetrip/js/update_profile.js","","false"); ?>
+<?php $this->carabiner->js("front_page/template/infongetrip/js/jquery.easyModal.js","","false"); ?>
 <?php $this->carabiner->js("general/datepicker/js/bootstrap-datepicker.min.js","","false"); ?>
 <?php echo $this->carabiner->display('js'); ?>
 

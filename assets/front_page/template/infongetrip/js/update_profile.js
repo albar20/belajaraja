@@ -1,3 +1,5 @@
+  
+
 
 function show_user(){
 	$.ajax({
@@ -9,8 +11,25 @@ function show_user(){
 	})
 }
 
+
+
 	$(document).ready(function() {
 
+
+
+
+		$('.easy-modal').easyModal({
+			top: 10,
+			overlay: 0.2
+		});
+		$('.easy-modal-open').click(function(e) {
+			var target = $(this).attr('href');
+			$(target).trigger('openModal');
+			e.preventDefault();
+		});
+
+
+$("#tes").hide();
  $( "#birthday" ).datepicker();
 
 // $(".navigation-menu").hide();

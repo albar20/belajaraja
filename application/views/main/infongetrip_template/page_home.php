@@ -773,6 +773,7 @@
 <?php $this->carabiner->js("front_page/template/infongetrip/js/waypoints.min.js","","false"); ?>
 <?php $this->carabiner->js("front_page/template/infongetrip/js/jquery.counterup.min.js","","false"); ?>
 <?php $this->carabiner->js("front_page/template/infongetrip/js/theme.js","","false"); ?>
+<?php $this->carabiner->js("front_page/template/infongetrip/js/jquery.easyModal.js","","false"); ?>
 
 <?php echo $this->carabiner->display('js'); ?>
 

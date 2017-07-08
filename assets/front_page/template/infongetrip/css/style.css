@@ -87,6 +87,12 @@ abbr[title] {
 	border-bottom: 1px dotted;
 }
 
+.update_pict{
+	font-size: 26px;
+	position: relative;
+	top: 27px;
+}
+
 b, strong {
 	font-weight: bold;
 }

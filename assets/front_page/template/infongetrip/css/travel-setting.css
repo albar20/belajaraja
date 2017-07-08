@@ -68,14 +68,14 @@ h6 {
 	border-color: #ffb300;
 }
 
+/*Wrapper */
+
 .wrapper-footer {
 	background: #414b4f;
 	color:      #ccc;
 }
 
-.wrapper-footer a {
-	color: #fff;
-}
+
 
 .wrapper-footer a:hover {
 	color: #ffb300;
@@ -98,6 +98,9 @@ h6 {
 	color:     #fff;
 	font-size: 18px;
 }
+
+
+/*Wrapper*/
 
 .widget-area aside .widget-title:before {
 	background: #ffb300;
@@ -306,6 +309,9 @@ h6 {
 	color:      #fff;
 }
 
+.wrapper-footer a {
+	color: #fff;
+}
 .error {
 	border-color: #26bdf7;
 }

@@ -12,7 +12,8 @@
 
 				<?php foreach ($review as $rev) {?>
 				<tr>
-					<td>  <img class="image_review" src="<?php echo base_url() ?>uploads/wisata/asdasdsad/thumb/thumb_11DreadOut_branding_image.jpg"></td>
+					<td>
+  <img class="image_review" src="<?php echo base_url() ?>uploads/wisata/asdasdsad/thumb/thumb_11DreadOut_branding_image.jpg"></td>
 					<td class="desc">
 							<a href=""><i class="fa fa-map-marker" aria-hidden="true"></i>
 <?php echo $rev->tourism_place_id; ?> Barcelona: Hotel The Serras</a>
